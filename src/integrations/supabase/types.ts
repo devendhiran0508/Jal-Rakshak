@@ -14,7 +14,142 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      alerts: {
+        Row: {
+          created_at: string
+          created_by: string
+          id: string
+          message: string
+          target_roles: Database["public"]["Enums"]["user_role"][]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          id?: string
+          message: string
+          target_roles: Database["public"]["Enums"]["user_role"][]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          id?: string
+          message?: string
+          target_roles?: Database["public"]["Enums"]["user_role"][]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alerts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          user_id: string
+          village: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id: string
+          village: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id?: string
+          village?: string
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          asha_id: string
+          created_at: string
+          id: string
+          patient_name: string
+          symptoms: string
+          updated_at: string
+          village: string
+          water_source: string
+        }
+        Insert: {
+          asha_id: string
+          created_at?: string
+          id?: string
+          patient_name: string
+          symptoms: string
+          updated_at?: string
+          village: string
+          water_source: string
+        }
+        Update: {
+          asha_id?: string
+          created_at?: string
+          id?: string
+          patient_name?: string
+          symptoms?: string
+          updated_at?: string
+          village?: string
+          water_source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_asha_id_fkey"
+            columns: ["asha_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      sensors: {
+        Row: {
+          created_at: string
+          id: string
+          ph: number
+          turbidity: number
+          updated_at: string
+          village: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ph: number
+          turbidity: number
+          updated_at?: string
+          village: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ph?: number
+          turbidity?: number
+          updated_at?: string
+          village?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +158,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      user_role: "asha" | "official" | "community" | "villager"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +285,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_role: ["asha", "official", "community", "villager"],
+    },
   },
 } as const
