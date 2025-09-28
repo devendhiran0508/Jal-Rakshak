@@ -119,3 +119,26 @@ export const shouldRefreshEducationContent = (): boolean => {
     return true;
   }
 };
+
+// Generic offline storage for any data type
+export const saveToOfflineStorage = (key: string, data: any): void => {
+  try {
+    const storageKey = `jal_rakshak_offline_${key}`;
+    const existingData = getFromOfflineStorage(key);
+    const updatedData = Array.isArray(existingData) ? [data, ...existingData] : [data];
+    localStorage.setItem(storageKey, JSON.stringify(updatedData));
+  } catch (error) {
+    console.error(`Failed to save to offline storage (${key}):`, error);
+  }
+};
+
+export const getFromOfflineStorage = (key: string): any[] => {
+  try {
+    const storageKey = `jal_rakshak_offline_${key}`;
+    const data = localStorage.getItem(storageKey);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error(`Failed to get from offline storage (${key}):`, error);
+    return [];
+  }
+};

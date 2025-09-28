@@ -12,6 +12,7 @@ import OfflineIndicator from '@/components/OfflineIndicator';
 import HealthEducation from '@/components/HealthEducation';
 import FeedbackForm from '@/components/FeedbackForm';
 import VillagerSymptomReport from '@/components/VillagerSymptomReport';
+import VillagerIssueReport from '@/components/VillagerIssueReport';
 import { useOfflineSync } from '@/hooks/useOfflineSync';
 
 interface Alert {
@@ -285,6 +286,7 @@ const Villager: React.FC = () => {
           
           <TabsContent value="overview" className="space-y-6">
             <VillagerSymptomReport />
+            <VillagerIssueReport />
           </TabsContent>
           
           <TabsContent value="education" className="space-y-6">
