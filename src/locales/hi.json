@@ -215,7 +215,10 @@
     "noAlertsTime": "इस समय कोई अलर्ट नहीं",
     "staySafeHealthy": "सुरक्षित और स्वस्थ रहें!",
     "from": "से",
-    "aiPredicted": "एआई भविष्यवाणी"
+    "aiPredicted": "एआई भविष्यवाणी",
+    "overview": "अवलोकन",
+    "healthEducation": "स्वास्थ्य शिक्षा",
+    "feedbackAndSupport": "फीडबैक और सहायता"
   },
 
   "symptoms": {

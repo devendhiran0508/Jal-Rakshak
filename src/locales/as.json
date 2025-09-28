@@ -217,7 +217,10 @@
     "noAlertsTime": "এইসময়ত কোনো সতৰ্কতা নাই",
     "staySafeHealthy": "নিৰাপদ আৰু সুস্থ থাকক!",
     "from": "ৰ পৰা",
-    "aiPredicted": "AI পূৰ্বানুমান"
+    "aiPredicted": "AI পূৰ্বানুমান",
+    "overview": "সাৰাংশ",
+    "healthEducation": "স্বাস্থ্য শিক্ষা",
+    "feedbackAndSupport": "মতামত আৰু সহায়তা"
   },
 
   "symptoms": {

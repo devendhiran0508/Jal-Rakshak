@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
-import { Home, AlertTriangle, Droplets, Activity, LogOut, Thermometer, TestTube } from 'lucide-react';
+import { Home, AlertTriangle, Droplets, Activity, LogOut, Thermometer, TestTube, BookOpen, MessageCircle } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import HealthEducation from '@/components/HealthEducation';
@@ -269,21 +270,41 @@ const Villager: React.FC = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
-          {/* Villager Symptom Report */}
-          <div className="lg:col-span-1">
+        {/* Main Content Tabs */}
+        <Tabs defaultValue="overview" className="mt-6">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="overview" className="flex items-center gap-2">
+              <Activity className="h-4 w-4" />
+              {t('villager.overview')}
+            </TabsTrigger>
+            <TabsTrigger value="education" className="flex items-center gap-2">
+              <BookOpen className="h-4 w-4" />
+              {t('villager.healthEducation')}
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="overview" className="space-y-6">
             <VillagerSymptomReport />
-          </div>
+          </TabsContent>
           
-          {/* Health Education - Takes full width on mobile, spans 2 cols on xl */}
-          <div className="lg:col-span-1 xl:col-span-2">
+          <TabsContent value="education" className="space-y-6">
             <HealthEducation userRole="villager" />
-          </div>
-          
-          {/* Feedback Form - Below symptom report on xl, full width on smaller screens */}
-          <div className="lg:col-span-2 xl:col-span-1">
-            <FeedbackForm />
-          </div>
+          </TabsContent>
+        </Tabs>
+
+        {/* Feedback Form - Always at bottom */}
+        <div className="mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <MessageCircle className="h-5 w-5 mr-2" />
+                {t('villager.feedbackAndSupport')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <FeedbackForm />
+            </CardContent>
+          </Card>
         </div>
 
         {/* Water Quality Guidelines */}

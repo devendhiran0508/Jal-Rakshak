@@ -215,7 +215,10 @@
     "noAlertsTime": "No alerts at this time",
     "staySafeHealthy": "Stay safe and healthy!",
     "from": "from",
-    "aiPredicted": "AI Predicted"
+    "aiPredicted": "AI Predicted",
+    "overview": "Overview",
+    "healthEducation": "Health Education",
+    "feedbackAndSupport": "Feedback & Support"
   },
 
   "symptoms": {
