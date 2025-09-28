@@ -72,6 +72,7 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean | null
+          language: string
           priority: number | null
           target_role: Database["public"]["Enums"]["user_role"]
           title: string
@@ -84,6 +85,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          language?: string
           priority?: number | null
           target_role: Database["public"]["Enums"]["user_role"]
           title: string
@@ -96,6 +98,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          language?: string
           priority?: number | null
           target_role?: Database["public"]["Enums"]["user_role"]
           title?: string

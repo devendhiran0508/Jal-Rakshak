@@ -125,37 +125,7 @@ const CommunityMember: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Health Education */}
-          <div className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <BookOpen className="h-5 w-5 mr-2" />
-                  {t('community.healthEducation')}
-                </CardTitle>
-                <CardDescription>
-                  {t('community.importantInfo')}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {healthEducationContent.map((item, index) => (
-                    <div key={index} className="border rounded-lg p-4">
-                      <div className="flex items-start space-x-3">
-                        {item.icon}
-                        <div>
-                          <h4 className="font-semibold mb-2">{item.title}</h4>
-                          <p className="text-sm text-muted-foreground">{item.content}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
+        <div className="grid grid-cols-1 gap-6">
           {/* Alerts */}
           <Card>
             <CardHeader>

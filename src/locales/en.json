@@ -253,7 +253,9 @@
     },
     "noContent": "No educational content available at this time.",
     "readMore": "Read More",
-    "readLess": "Read Less"
+    "readLess": "Read Less",
+    "fallbackNotice": "Language content unavailable",
+    "fallbackDescription": "Showing content in English as fallback"
   },
 
   "feedback": {
