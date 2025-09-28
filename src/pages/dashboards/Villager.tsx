@@ -269,19 +269,19 @@ const Villager: React.FC = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
           {/* Villager Symptom Report */}
-          <div className="xl:col-span-1">
+          <div className="lg:col-span-1">
             <VillagerSymptomReport />
           </div>
           
-          {/* Health Education */}
-          <div className="xl:col-span-2">
+          {/* Health Education - Takes full width on mobile, spans 2 cols on xl */}
+          <div className="lg:col-span-1 xl:col-span-2">
             <HealthEducation userRole="villager" />
           </div>
           
-          {/* Feedback Form */}
-          <div className="xl:col-span-1 xl:col-start-1 xl:row-start-2">
+          {/* Feedback Form - Below symptom report on xl, full width on smaller screens */}
+          <div className="lg:col-span-2 xl:col-span-1">
             <FeedbackForm />
           </div>
         </div>
