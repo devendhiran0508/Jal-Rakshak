@@ -1,0 +1,287 @@
+{
+  "appName": "জল ৰক্ষক",
+  "appSubtitle": "পানী আৰু স্বাস্থ্য ৰক্ষক",
+  "appDescription": "পানীৰ গুণগত মান নিৰীক্ষণ আৰু সম্প্রদায়িক স্বাস্থ্যৰ বাবে এক সম্পূৰ্ণ প্লেটফৰ্ম। আশা কৰ্মী, স্বাস্থ্য বিষয়া আৰু সম্প্রদায়ক উন্নত স্বাস্থ্য ফলাফলৰ বাবে একেলগে কাম কৰিবলৈ সক্ষম কৰা।",
+  "getStarted": "আৰম্ভ কৰক",
+  "language": "ভাষা",
+  "english": "English",
+  "hindi": "हिंदी",
+  "assamese": "অসমীয়া",
+  "bodo": "बोडो",
+  
+  "auth": {
+    "login": "প্ৰৱেশ কৰক",
+    "signup": "নিবন্ধন কৰক",
+    "email": "ইমেইল",
+    "password": "পাছৱৰ্ড",
+    "fullName": "সম্পূৰ্ণ নাম",
+    "village": "গাঁও",
+    "role": "ভূমিকা",
+    "selectRole": "আপোনাৰ ভূমিকা নিৰ্বাচন কৰক",
+    "loginTitle": "আপোনাৰ একাউণ্টত প্ৰৱেশ কৰক",
+    "signupTitle": "আপোনাৰ একাউণ্ট সৃষ্টি কৰক",
+    "loading": "লোড হৈ আছে...",
+    "alreadyHaveAccount": "ইতিমধ্যে একাউণ্ট আছে? প্ৰৱেশ কৰক",
+    "dontHaveAccount": "একাউণ্ট নাই? নিবন্ধন কৰক",
+    "signupSuccess": "একাউণ্ট সফলভাবে সৃষ্টি হৈছে! অনুগ্ৰহ কৰি আপোনাৰ ইমেইল পৰীক্ষা কৰক।",
+    "fillAllFields": "অনুগ্ৰহ কৰি সকলো ক্ষেত্ৰ পূৰণ কৰক",
+    "loginError": "প্ৰৱেশ ত্ৰুটি",
+    "signupError": "নিবন্ধন ত্ৰুটি",
+    "unexpectedError": "এটা অপ্ৰত্যাশিত ত্ৰুটি ঘটিছে"
+  },
+
+  "roles": {
+    "asha": "আশা কৰ্মী",
+    "official": "স্বাস্থ্য বিষয়া", 
+    "community": "সম্প্রদায়িক সদস্য",
+    "villager": "গ্ৰামবাসী",
+    "ashaDescription": "স্বাস্থ্য প্ৰতিবেদন জমা দিয়ক আৰু সম্প্রদায়িক স্বাস্থ্য নিৰীক্ষণ কৰক",
+    "officialDescription": "প্ৰতিবেদন নিৰীক্ষণ কৰক, তথ্য বিশ্লেষণ কৰক আৰু সতৰ্কতা পঠিয়াওক",
+    "communityDescription": "স্বাস্থ্য শিক্ষা লাভ কৰক আৰু সতৰ্কতা গ্ৰহণ কৰক",
+    "villagerDescription": "পানীৰ গুণগত মান নিৰীক্ষণ কৰক আৰু স্বাস্থ্য সতৰ্কতা গ্ৰহণ কৰক"
+  },
+
+  "dashboard": {
+    "welcome": "স্বাগতম",
+    "overview": "সাৰাংশ",
+    "reports": "প্ৰতিবেদন",
+    "alerts": "সতৰ্কতা",
+    "education": "স্বাস্থ্য শিক্ষা",
+    "waterQuality": "পানীৰ গুণগত মান",
+    "feedback": "মতামত",
+    "logout": "প্ৰস্থান",
+    "submitReport": "প্ৰতিবেদন জমা দিয়ক",
+    "viewReports": "প্ৰতিবেদন চাওক",
+    "sendAlert": "সতৰ্কতা পঠিয়াওক",
+    "manageAlerts": "সতৰ্কতা পৰিচালনা কৰক"
+  },
+
+  "features": {
+    "healthMonitoring": "স্বাস্থ্য নিৰীক্ষণ",
+    "healthMonitoringDesc": "সম্প্রদায়িক স্বাস্থ্য কৰ্মীসকলৰ বাবে প্ৰকৃত সময়ৰ স্বাস্থ্য প্ৰতিবেদন জমা আৰু নিৰীক্ষণ ব্যৱস্থা",
+    "waterQuality": "পানীৰ গুণগত মান",
+    "waterQualityDesc": "নিৰাপদ পানীয় পানীৰ বাবে pH স্তৰ আৰু ঘোলাত্ব নিৰীক্ষণৰ জীৱন্ত চেন্সৰ তথ্য",
+    "alertSystem": "সতৰ্কতা ব্যৱস্থা",
+    "alertSystemDesc": "সম্প্রদায়লৈ তাৎক্ষণিক সতৰ্কতা আৰু স্বাস্থ্য শিক্ষা বিষয়বস্তু পৰিবহণ"
+  },
+
+  "waterMetrics": {
+    "ph": "pH স্তৰ",
+    "turbidity": "ঘোলাত্ব",
+    "temperature": "উষ্ণতা",
+    "excellent": "উৎকৃষ্ট",
+    "good": "ভাল", 
+    "fair": "মধ্যম",
+    "poor": "দুৰ্বল",
+    "status": "অৱস্থা"
+  },
+
+  "forms": {
+    "patientName": "ৰোগীৰ নাম",
+    "age": "বয়স",
+    "symptoms": "লক্ষণসমূহ",
+    "location": "স্থান",
+    "severity": "তীব্ৰতা",
+    "low": "কম",
+    "medium": "মধ্যম",
+    "high": "বেছি",
+    "submit": "জমা দিয়ক",
+    "message": "বাৰ্তা",
+    "title": "শিৰোনাম",
+    "description": "বিৱৰণ",
+    "send": "পঠিয়াওক"
+  },
+
+  "stats": {
+    "totalReports": "মুঠ প্ৰতিবেদন",
+    "activeAlerts": "সক্ৰিয় সতৰ্কতা",
+    "waterSources": "পানীৰ উৎস",
+    "education": "শিক্ষা বিষয়বস্তু"
+  },
+
+  "offline": {
+    "offline": "অফলাইন",
+    "online": "অনলাইন", 
+    "pendingReports": "{{count}} বাকী",
+    "smsMode": "SMS যোগে পঠিয়াওক (অফলাইন মোড)",
+    "smsPreview": "SMS পূৰ্বৰূপ",
+    "smsPreviewDescription": "ঘটনাটো প্ৰতিবেদন কৰিবলৈ এই বাৰ্তা কপি কৰি SMS যোগে পঠিয়াওক",
+    "smsContentPlaceholder": "SMS বিষয়বস্তু ইয়াত দেখা যাব...",
+    "smsInstructions": "ওপৰৰ বাৰ্তা কপি কৰি আপোনাৰ নিৰ্ধাৰিত স্বাস্থ্য বিষয়াৰ নম্বৰলৈ পঠিয়াওক",
+    "smsCopied": "SMS বিষয়বস্তু ক্লিপবৰ্ডত কপি হৈছে",
+    "smsCopyFailed": "SMS বিষয়বস্তু কপি কৰিবলৈ ব্যৰ্থ",
+    "saveOffline": "অফলাইনত সংৰক্ষণ কৰক",
+    "savingOffline": "সংৰক্ষণ কৰি আছে...",
+    "syncSuccess": "{{count}} প্ৰতিবেদন সফলভাবে সিংক হৈছে",
+    "syncPartial": "{{failed}} প্ৰতিবেদন সিংক কৰিবলৈ ব্যৰ্থ",
+    "syncFailed": "অফলাইন প্ৰতিবেদন সিংক কৰিবলৈ ব্যৰ্থ",
+    "offlineEducation": "অফলাইন স্বাস্থ্য শিক্ষা",
+    "villagerReport": "গ্ৰামবাসীৰ প্ৰতিবেদন",
+    "basicSymptomReport": "মৌলিক লক্ষণ প্ৰতিবেদন",
+    "offlineReportSaved": "প্ৰতিবেদন অফলাইনত সংৰক্ষিত। সংযোগ পুনৰুদ্ধাৰ হ'লে সিংক হ'ব।",
+    "smsReportSaved": "SMS প্ৰতিবেদন সংৰক্ষিত। স্বাস্থ্য বিষয়াসকলৰ সৈতে বাৰ্তা শ্বেয়াৰ কৰক।",
+    "offlineMode": "অফলাইন মোড",
+    "onlineMode": "অনলাইন মোড"
+  },
+
+  "common": {
+    "cancel": "বাতিল"
+  },
+
+  "asha": {
+    "submitHealthReport": "স্বাস্থ্য প্ৰতিবেদন জমা দিয়ক",
+    "reportHealthCases": "আপোনাৰ সম্প্রদায়ত স্বাস্থ্যৰ ঘটনা প্ৰতিবেদন কৰক",
+    "myReports": "মোৰ প্ৰতিবেদনসমূহ",
+    "submittedReports": "আপোনাৰ জমা দিয়া স্বাস্থ্য প্ৰতিবেদনসমূহ",
+    "noReportsYet": "এতিয়াও কোনো প্ৰতিবেদন জমা দিয়া নাই",
+    "selectSymptoms": "লক্ষণসমূহ নিৰ্বাচন কৰক",
+    "selectWaterSource": "পানীৰ উৎস নিৰ্বাচন কৰক",
+    "submitting": "জমা দি আছে...",
+    "submitReport": "প্ৰতিবেদন জমা দিয়ক",
+    "errorFetchReports": "প্ৰতিবেদনসমূহ আনিবলৈ ব্যৰ্থ",
+    "errorSubmitReport": "প্ৰতিবেদন জমা দিবলৈ ব্যৰ্থ",
+    "reportSubmitted": "স্বাস্থ্য প্ৰতিবেদন সফলভাবে জমা দিয়া হৈছে",
+    "symptomsLabel": "লক্ষণসমূহ:",
+    "waterSourceLabel": "পানীৰ উৎস:"
+  },
+
+  "official": {
+    "diseaseDistribution": "ৰোগ বিতৰণ",
+    "casesByVillage": "গাঁও অনুসৰি ঘটনা",
+    "recentReports": "শেহতীয়া প্ৰতিবেদনসমূহ",
+    "latestReports": "আশা কৰ্মীসকলৰ শেহতীয়া স্বাস্থ্য প্ৰতিবেদনসমূহ",
+    "createAlert": "সতৰ্কতা সৃষ্টি কৰক",
+    "sendAlertsToGroups": "নিৰ্দিষ্ট ব্যৱহাৰকাৰী গোটলৈ সতৰ্কতা পঠিয়াওক",
+    "alertMessage": "সতৰ্কতা বাৰ্তা",
+    "enterMessage": "সতৰ্কতা বাৰ্তা লিখক...",
+    "targetRoles": "লক্ষ্য ভূমিকা",
+    "creating": "সৃষ্টি কৰি আছে...",
+    "alertCreated": "সতৰ্কতা সফলভাবে সৃষ্টি হৈছে",
+    "errorCreateAlert": "সতৰ্কতা সৃষ্টি কৰিবলৈ ব্যৰ্থ",
+    "recentAlerts": "শেহতীয়া সতৰ্কতাসমূহ",
+    "affectedVillages": "প্ৰভাৱিত গাঁওসমূহ",
+    "patient": "ৰোগী",
+    "date": "তাৰিখ",
+    "predictedOutbreaks": "AI পূৰ্বানুমান কৰা প্ৰাদুৰ্ভাৱ",
+    "aiDetectedAlerts": "AI দ্বাৰা সনাক্ত কৰা সম্ভাব্য ৰোগ প্ৰাদুৰ্ভাৱ",
+    "diseaseCluster": "ৰোগ গোট",
+    "waterQuality": "পানীৰ গুণগত মান",
+    "seasonal": "ঋতুজনিত",
+    "parameter": "পেৰামিটাৰ",
+    "aiGenerated": "AI উৎপন্ন"
+  },
+
+  "community": {
+    "healthEducation": "স্বাস্থ্য শিক্ষা",
+    "importantInfo": "সম্প্রদায়িক স্বাস্থ্য আৰু সুৰক্ষাৰ বাবে গুৰুত্বপূৰ্ণ তথ্য",
+    "healthAlerts": "স্বাস্থ্য সতৰ্কতা",
+    "alertsFromOfficials": "স্বাস্থ্য বিষয়াসকলৰ গুৰুত্বপূৰ্ণ সতৰ্কতা",
+    "noAlertsNow": "এইসময়ত কোনো সতৰ্কতা নাই",
+    "stayTuned": "গুৰুত্বপূৰ্ণ স্বাস্থ্য আপডেটৰ বাবে অপেক্ষা কৰক",
+    "quickHealthTips": "দ্ৰুত স্বাস্থ্য টিপছ",
+    "dailyPractices": "উন্নত স্বাস্থ্যৰ বাবে দৈনন্দিন অভ্যাস",
+    "cleanWater": "পৰিষ্কাৰ পানী",
+    "alwaysUsePurified": "পানীয় আৰু ৰন্ধনৰ বাবে সদায় বিশুদ্ধ পানী ব্যৱহাৰ কৰক",
+    "handHygiene": "হাতৰ পৰিচ্ছন্নতা",
+    "washHandsFrequently": "চাবোন আৰু পৰিষ্কাৰ পানীৰে সঘনাই হাত ধুব",
+    "communityCare": "সম্প্রদায়িক যত্ন",
+    "helpNeighbors": "প্ৰতিবেশীসকলক সহায় কৰক আৰু স্বাস্থ্যৰ সমস্যা প্ৰতিবেদন কৰক",
+    "waterPurificationMethods": "পানী বিশুদ্ধকৰণ পদ্ধতি",
+    "waterPurificationDesc": "নিৰাপদ পানীয় পানী নিশ্চিত কৰিবলৈ অন্ততঃ ১ মিনিট পানী উতলাওক, পানী বিশুদ্ধকৰণ টেবলেট ব্যৱহাৰ কৰক, বা উপযুক্ত পানী ফিল্টাৰ ব্যৱহাৰ কৰক।",
+    "preventingWaterborne": "পানীজনিত ৰোগ প্ৰতিৰোধ",
+    "preventingWaterborneDesc": "সদায় চাবোনেৰে হাত ধুব, দূষিত পানীৰ উৎস এৰাই চলিব, আৰু টান ঢাকনিৰ সৈতে পৰিষ্কাৰ পাত্ৰত পানী সংৰক্ষণ কৰিব।",
+    "recognizingSymptoms": "লক্ষণ চিনাক্তকৰণ",
+    "recognizingSymptomsDesc": "পানীশূন্যতা, ডায়েৰিয়া, জ্বৰ আৰু পেটৰ বিষৰ লক্ষণলৈ চাওক। গুৰুতৰ লক্ষণৰ বাবে তাৎক্ষণিক চিকিৎসা সহায় লওক।",
+    "communityHygiene": "সম্প্রদায়িক পৰিচ্ছন্নতা",
+    "communityHygieneDesc": "ৰোগ বিয়পণ প্ৰতিৰোধ কৰিবলৈ পৰিষ্কাৰ পৰিৱেশ, উপযুক্ত আৱৰ্জনা নিষ্কাশন আৰু পানী সংৰক্ষণ অঞ্চলৰ নিয়মীয়া পৰিষ্কাৰকৰণ বজাই ৰাখিব।"
+  },
+
+  "villager": {
+    "waterQualityMonitoring": "পানীৰ গুণগত মান নিৰীক্ষণ",
+    "realTimeSensorData": "চেন্সৰৰ পৰা প্ৰকৃত সময়ৰ পানীৰ গুণগত মানৰ তথ্য",
+    "noSensorData": "কোনো চেন্সৰ তথ্য উপলব্ধ নাই",
+    "sensorsDeployed": "চেন্সৰসমূহ শীঘ্ৰেই স্থাপন কৰা হ'ব",
+    "waterQualityGuidelines": "পানীৰ গুণগত মানৰ নিৰ্দেশিকা",
+    "understandingParameters": "পানীৰ গুণগত মান পেৰামিটাৰ বুজা",
+    "phLevels": "pH স্তৰ",
+    "turbidityNTU": "ঘোলাত্ব (NTU)",
+    "goodRange": "ভাল",
+    "fairRange": "মধ্যম",
+    "poorRange": "দুৰ্বল",
+    "safeToDrink": "খোৱাৰ বাবে নিৰাপদ",
+    "treatBeforeUse": "ব্যৱহাৰৰ আগত শোধন কৰক",
+    "notSafe": "নিৰাপদ নহয়",
+    "clearWater": "স্বচ্ছ পানী",
+    "slightlyCloudy": "অলপ ঘোলা",
+    "veryCloudy": "বহুত ঘোলা",
+    "noAlertsTime": "এইসময়ত কোনো সতৰ্কতা নাই",
+    "staySafeHealthy": "নিৰাপদ আৰু সুস্থ থাকক!",
+    "from": "ৰ পৰা",
+    "aiPredicted": "AI পূৰ্বানুমান"
+  },
+
+  "symptoms": {
+    "diarrhea": "ডায়েৰিয়া",
+    "vomiting": "বমি",
+    "fever": "জ্বৰ",
+    "stomachPain": "পেটৰ বিষ",
+    "dehydration": "পানীশূন্যতা",
+    "skinRash": "ছালৰ ফুলা",
+    "eyeInfection": "চকুৰ সংক্ৰমণ",
+    "typhoid": "টাইফয়েড",
+    "cholera": "কলেৰা",
+    "hepatitis": "হেপাটাইটিছ"
+  },
+
+  "waterSources": {
+    "tubeWell": "টিউব ৱেল",
+    "handPump": "হেণ্ড পাম্প",
+    "openWell": "খোলা নাদ",
+    "riverStream": "নদী/জুৰি",
+    "pond": "পুখুৰী",
+    "tankWater": "টেংকৰ পানী",
+    "bottledWater": "বটলৰ পানী"
+  },
+
+  "education": {
+    "title": "স্বাস্থ্য শিক্ষা",
+    "subtitle": "গুৰুত্বপূৰ্ণ স্বাস্থ্য আৰু সুৰক্ষা তথ্য",
+    "categories": {
+      "water_safety": "পানীৰ সুৰক্ষা",
+      "hygiene": "পৰিচ্ছন্নতা",
+      "health_awareness": "স্বাস্থ্য সচেতনতা",
+      "community_engagement": "সম্প্রদায়িক সংযোগ",
+      "seasonal_health": "ঋতুজনিত স্বাস্থ্য"
+    },
+    "noContent": "এইসময়ত কোনো শিক্ষামূলক বিষয়বস্তু উপলব্ধ নাই।",
+    "readMore": "অধিক পঢ়ক",
+    "readLess": "কম পঢ়ক"
+  },
+
+  "feedback": {
+    "title": "মতামত আৰু অভিযোগ",
+    "subtitle": "আপোনাৰ উদ্বেগ আৰু পৰামৰ্শ শ্বেয়াৰ কৰক",
+    "form": {
+      "message": "আপোনাৰ বাৰ্তা",
+      "messagePlaceholder": "আপোনাৰ উদ্বেগ, অভিযোগ বা পৰামৰ্শ বৰ্ণনা কৰক...",
+      "submit": "মতামত জমা দিয়ক",
+      "submitting": "জমা দি আছে..."
+    },
+    "status": {
+      "pending": "বাকী",
+      "reviewed": "পৰীক্ষিত",
+      "resolved": "সমাধান"
+    },
+    "success": "মতামত সফলভাবে জমা দিয়া হৈছে!",
+    "error": "মতামত জমা দিবলৈ ব্যৰ্থ। অনুগ্ৰহ কৰি পুনৰ চেষ্টা কৰক।",
+    "noFeedback": "এতিয়াও কোনো মতামত জমা দিয়া নাই।",
+    "yourFeedback": "আপোনাৰ পূৰ্বৰ মতামত",
+    "allFeedback": "সম্প্রদায়িক মতামত",
+    "response": "চৰকাৰী প্ৰতিক্ৰিয়া"
+  },
+
+  "messages": {
+    "error": "ত্ৰুটি",
+    "success": "সফল"
+  }
+}

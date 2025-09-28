@@ -60,6 +60,72 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Adding New Tribal Languages
+
+Jal Rakshak is designed to be easily extensible for tribal languages. To add a new language:
+
+### Step 1: Create a new language file
+Create a new JSON file in `src/locales/` named with the language code (e.g., `mizo.json`, `khasi.json`).
+
+### Step 2: Add translations
+Copy the structure from `src/locales/en.json` and translate all the keys. For reference, see:
+- `src/locales/en.json` - English (base)
+- `src/locales/hi.json` - Hindi 
+- `src/locales/as.json` - Assamese
+- `src/locales/bodo.json` - Bodo (sample implementation)
+
+### Step 3: Register the language
+In `src/i18n.ts`:
+1. Import your new language file:
+   ```typescript
+   import mizo from './locales/mizo.json';
+   ```
+
+2. Add it to the resources object:
+   ```typescript
+   const resources = {
+     // ... existing languages
+     mizo: {
+       translation: mizo
+     }
+   };
+   ```
+
+### Step 4: Add to language selector
+In `src/components/LanguageToggle.tsx`, add a new SelectItem:
+```jsx
+<SelectItem value="mizo">{t('mizo')}</SelectItem>
+```
+
+### Step 5: Add language name translation
+Add the language name to all translation files:
+```json
+{
+  "mizo": "Mizo ṭawng"
+}
+```
+
+### Language Structure
+Each language file should include translations for:
+- App metadata (name, description)
+- Authentication flows
+- Dashboard interfaces  
+- Role descriptions
+- Forms and inputs
+- Health education content
+- Water quality metrics
+- Symptoms and water sources
+- Offline functionality
+- SMS features
+
+### Note for Tribal Languages
+When adding tribal languages, consider:
+- Use appropriate scripts (Devanagari, Latin, etc.)
+- Include cultural context in health education
+- Adapt terminology for local understanding
+- Test with native speakers
+- Consider right-to-left languages if applicable
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/61d12aa5-1580-40b5-a87f-5796be17f554) and click on Share -> Publish.

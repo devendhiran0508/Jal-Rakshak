@@ -1,0 +1,287 @@
+{
+  "appName": "दै रक्षक",
+  "appSubtitle": "दै आरो हेल्थ रक्षक",
+  "appDescription": "दै'र गुणमान आरो समुदाय'र हेल्थ'फोर मोन्खे थान हाबनाय एबा प्लेटफर्म। ASHA थानाग्रा, हेल्थ आफिसार आरो समुदाय'खौ बेहुदारी हेल्थ'र फल'फोर हासिलनो खामानि दाजाबहानाय।",
+  "getStarted": "सुरु खालाम",
+  "language": "राव",
+  "english": "English",
+  "hindi": "हिंदी",
+  "assamese": "অসমীয়া",
+  "bodo": "बोडो",
+  
+  "auth": {
+    "login": "लगिन खालाम",
+    "signup": "सुरुआत खालाम",
+    "email": "ईमेल",
+    "password": "पासवार्ड",
+    "fullName": "मुचाद मुं",
+    "village": "सिमांग",
+    "role": "हाबा",
+    "selectRole": "नों'गोनां हाबा बासिख",
+    "loginTitle": "नों'र एकाउंट आयदा लगिन खालाम",
+    "signupTitle": "नों'र एकाउंट सिजनाय खालाम",
+    "loading": "लोड खालामगौ...",
+    "alreadyHaveAccount": "एकाउंट दं? लगिन खालाम",
+    "dontHaveAccount": "एकाउंट दैया? सुरुआत खालाम",
+    "signupSuccess": "एकाउंट बावनायै सिजनाय जादोंमोन! नों'र ईमेल सेबनाय जाय।",
+    "fillAllFields": "गासै हाजाखौबो भरालाम",
+    "loginError": "लगिन बुंगौ",
+    "signupError": "सुरुआत बुंगौ",
+    "unexpectedError": "एबा दैयाखा बुंगौ जाहोनमोन"
+  },
+
+  "roles": {
+    "asha": "ASHA थानाग्रा",
+    "official": "हेल्थ आफिसार", 
+    "community": "समुदाय'र सांनि",
+    "villager": "सिमांगारि",
+    "ashaDescription": "हेल्थ रिपर्ट हाबहोन आरो समुदाय'र हेल्थ सेबनाय",
+    "officialDescription": "रिपर्ट सेबनाय, डाटा सेबनाय आरो सावगारि कालामनाय",
+    "communityDescription": "हेल्थ सिकिलाम आरो सावगारि लोनाय",
+    "villagerDescription": "दै'र गुणमान सेबनाय आरो हेल्थ सावगारि लोनाय"
+  },
+
+  "dashboard": {
+    "welcome": "नमस्कार",
+    "overview": "गुबनि",
+    "reports": "रिपर्ट",
+    "alerts": "सावगारि",
+    "education": "हेल्थ सिकिलाम",
+    "waterQuality": "दै'र गुणमान",
+    "feedback": "मतलब",
+    "logout": "थांनाय",
+    "submitReport": "रिपर्ट हाबहोन",
+    "viewReports": "रिपर्ट नायनाय",
+    "sendAlert": "सावगारि कालामनाय",
+    "manageAlerts": "सावगारि सांनालनाय"
+  },
+
+  "features": {
+    "healthMonitoring": "हेल्थ सेबनाय",
+    "healthMonitoringDesc": "समुदाय'र हेल्थ थानाग्राखौ रिअल टाइम हेल्थ रिपर्ट हाबहोन आरो सेबनाय सिस्टेम",
+    "waterQuality": "दै'र गुणमान",
+    "waterQualityDesc": "निरापद लुनाय दै'फोर pH लेभेल आरो खुसुमनाय सेन्सार डाटा सेबनाय",
+    "alertSystem": "सावगारि सिस्टेम",
+    "alertSystemDesc": "समुदायहोनो उल्टाई सावगारि आरो हेल्थ सिकिलाम कन्टेन्ट जोगानाय"
+  },
+
+  "waterMetrics": {
+    "ph": "pH लेभेल",
+    "turbidity": "खुसुमनाय",
+    "temperature": "तापमान",
+    "excellent": "खुब बावनो",
+    "good": "बावनो", 
+    "fair": "मध्यम",
+    "poor": "दैयाबनो",
+    "status": "अवस्था"
+  },
+
+  "forms": {
+    "patientName": "रोगि'र मुं",
+    "age": "बरस",
+    "symptoms": "लाखोसोर",
+    "location": "जागा",
+    "severity": "रागथानि",
+    "low": "खाथो",
+    "medium": "मध्यम",
+    "high": "गेदेर",
+    "submit": "हाबहोन",
+    "message": "खबर",
+    "title": "मुं",
+    "description": "बायदि",
+    "send": "कालामनाय"
+  },
+
+  "stats": {
+    "totalReports": "गासै रिपर्ट",
+    "activeAlerts": "सक्रिय सावगारि",
+    "waterSources": "दै'र सोमोन",
+    "education": "सिकिलाम कन्टेन्ट"
+  },
+
+  "offline": {
+    "offline": "आफलाइन",
+    "online": "आनलाइन", 
+    "pendingReports": "{{count}} बाखिगो",
+    "smsMode": "SMS दावबो कालामनाय (आफलाइन मोड)",
+    "smsPreview": "SMS नुजानाय",
+    "smsPreviewDescription": "गेदेनै रिपर्ट खालामनो बे खबर कपि खालाम आरो SMS दावबो कालामनाय",
+    "smsContentPlaceholder": "SMS कन्टेन्ट बेयादा दिन्थिनों...",
+    "smsInstructions": "गोजौदा खबर कपि खालाम आरो नों'र नियुक्त हेल्थ आफिसार'र नम्बारआव कालामनाय",
+    "smsCopied": "SMS कन्टेन्ट क्लिपबोर्डआव कपि जादोंमोन",
+    "smsCopyFailed": "SMS कन्टेन्ट कपि खालामनो हुनायबा",
+    "saveOffline": "आफलाइनआव थिनाय",
+    "savingOffline": "थिनायगौ...",
+    "syncSuccess": "{{count}} रिपर्ट बावनायै सिंक जादोंमोन",
+    "syncPartial": "{{failed}} रिपर्ट सिंक खालामनो हुनायबा",
+    "syncFailed": "आफलाइन रिपर्ट सिंक खालामनो हुनायबा",
+    "offlineEducation": "आफलाइन हेल्थ सिकिलाम",
+    "villagerReport": "सिमांगारि'र रिपर्ट",
+    "basicSymptomReport": "मुल लाखोसोर रिपर्ट",
+    "offlineReportSaved": "रिपर्ट आफलाइनआव थिनायदोंमोन। कनेक्सन फिननो सिंक जानों।",
+    "smsReportSaved": "SMS रिपर्ट थिनायदोंमोन। हेल्थ आफिसारखौ खबर सेयार खालाम।",
+    "offlineMode": "आफलाइन मोड",
+    "onlineMode": "आनलाइन मोड"
+  },
+
+  "common": {
+    "cancel": "रद्द खालाम"
+  },
+
+  "asha": {
+    "submitHealthReport": "हेल्थ रिपर्ट हाबहोन",
+    "reportHealthCases": "नों'र समुदायआव हेल्थ'र केससोर रिपर्ट खालाम",
+    "myReports": "आंगर रिपर्टसोर",
+    "submittedReports": "नों'र हाबहोनदों हेल्थ रिपर्टसोर",
+    "noReportsYet": "लाइगो मुइथा रिपर्ट हाबहोनया",
+    "selectSymptoms": "लाखोसोर बासिखलाम",
+    "selectWaterSource": "दै'र सोमोन बासिखलाम",
+    "submitting": "हाबहोनगौ...",
+    "submitReport": "रिपर्ट हाबहोन",
+    "errorFetchReports": "रिपर्टसोर अननो हुनायबा",
+    "errorSubmitReport": "रिपर्ट हाबहोननो हुनायबा",
+    "reportSubmitted": "हेल्थ रिपर्ट बावनायै हाबहोनदोंमोन",
+    "symptomsLabel": "लाखोसोर:",
+    "waterSourceLabel": "दै'र सोमोन:"
+  },
+
+  "official": {
+    "diseaseDistribution": "बेमार जोगोसारि",
+    "casesByVillage": "सिमांग अनुसारे केससोर",
+    "recentReports": "नायै रिपर्टसोर",
+    "latestReports": "ASHA थानाग्राखौ'र नायै हेल्थ रिपर्टसोर",
+    "createAlert": "सावगारि सिजनाय",
+    "sendAlertsToGroups": "गोनां गुं'खौगो सावगारि कालामनाय",
+    "alertMessage": "सावगारि खबर",
+    "enterMessage": "सावगारि खबर बिजिर...",
+    "targetRoles": "लक्ष्य हाबा",
+    "creating": "सिजनायगौ...",
+    "alertCreated": "सावगारि बावनायै सिजनायदोंमोन",
+    "errorCreateAlert": "सावगारि सिजनायनो हुनायबा",
+    "recentAlerts": "नायै सावगारिसोर",
+    "affectedVillages": "प्रभावित सिमांगसोर",
+    "patient": "रोगि",
+    "date": "तारिख",
+    "predictedOutbreaks": "AI दावबो बुंगराहुन प्रादुर्भाव",
+    "aiDetectedAlerts": "AI दावबो संजायदों संभावित बेमार प्रादुर्भाव",
+    "diseaseCluster": "बेमार गुठि",
+    "waterQuality": "दै'र गुणमान",
+    "seasonal": "मौसमि",
+    "parameter": "पेरामिटार",
+    "aiGenerated": "AI दावबो सिजनाय"
+  },
+
+  "community": {
+    "healthEducation": "हेल्थ सिकिलाम",
+    "importantInfo": "समुदाय'र हेल्थ आरो सुरक्षाफोर गोबां सुचना",
+    "healthAlerts": "हेल्थ सावगारि",
+    "alertsFromOfficials": "हेल्थ आफिसारखौ'र गोबां सावगारि",
+    "noAlertsNow": "बे समयावै मुइथा सावगारि नाय",
+    "stayTuned": "गोबां हेल्थ अपडेटफोर लाफा थानाय",
+    "quickHealthTips": "झट हेल्थ टिप्स",
+    "dailyPractices": "बावनो हेल्थ'फोर हैनिहानि हाबा",
+    "cleanWater": "साफ दै",
+    "alwaysUsePurified": "लुनाय आरो रानानि'फोर सारायनि साफ दै बाहाय",
+    "handHygiene": "खारगुथि साफा",
+    "washHandsFrequently": "सबुन आरो साफ दै दावबो माडा माडा खारगुथि धुवै",
+    "communityCare": "समुदाय सेवा",
+    "helpNeighbors": "गुरैयारखौ मदद खालाम आरो हेल्थ'र गेदेनै रिपर्ट खालाम",
+    "waterPurificationMethods": "दै साफानाय बांहानि",
+    "waterPurificationDesc": "निरापद लुनाय दै हासिल खालामनो हरि कमावै 1 मिनिट दै खुलुवै, दै साफानाय टेबलेट बाहाय नायथि बावनो दै फिल्टार बाहाय।",
+    "preventingWaterborne": "दै दावबो जानो बेमार सावनाय",
+    "preventingWaterborneDesc": "सारायनि सबुन दावबो खारगुथि धुवै, बेसाफ दै'र सोमोन सावना आरो धुथुम गोबना थिफैं साफ पात्रआव दै थिनाय।",
+    "recognizingSymptoms": "लाखोसोर संजानाय",
+    "recognizingSymptomsDesc": "दै खांगनाय, ढिरां-गुं, नागौ आरो खैंगो गुगुन लाखोसोर नायनाय। रागथानि लाखोसोर'फोर उल्टा डाक्तारआव दानाय।",
+    "communityHygiene": "समुदाय साफा",
+    "communityHygieneDesc": "बेमार जोगोसारि सावनानो साफ बारिगोराइ, बावनो फिसा थांनाय आरो दै थिनाय जागाखौ'र नियमित सफाइ राखै।"
+  },
+
+  "villager": {
+    "waterQualityMonitoring": "दै'र गुणमान सेबनाय",
+    "realTimeSensorData": "सेन्सारखौ'र रिअल टाइम दै'र गुणमान डाटा",
+    "noSensorData": "मुइथा सेन्सार डाटा नाय",
+    "sensorsDeployed": "सेन्सारसोर फारिहि बुहुनों",
+    "waterQualityGuidelines": "दै'र गुणमान गाइडलाइन",
+    "understandingParameters": "दै'र गुणमान पेरामिटार बुझनाय",
+    "phLevels": "pH लेभेल",
+    "turbidityNTU": "खुसुमनाय (NTU)",
+    "goodRange": "बावनो",
+    "fairRange": "मध्यम",
+    "poorRange": "दैयाबनो",
+    "safeToDrink": "लुनानो निरापद",
+    "treatBeforeUse": "बाहायनि सिगाङावै इलाज खालाम",
+    "notSafe": "निरापद नङा",
+    "clearWater": "सुजुर दै",
+    "slightlyCloudy": "थुरै खुसुम",
+    "veryCloudy": "गेदेर खुसुम",
+    "noAlertsTime": "बे समयावै मुइथा सावगारि नाय",
+    "staySafeHealthy": "निरापद आरो फायदो थानाय!",
+    "from": "निथाव",
+    "aiPredicted": "AI बुंगराहुन"
+  },
+
+  "symptoms": {
+    "diarrhea": "ढिरां-गुं",
+    "vomiting": "उल्टी",
+    "fever": "नागौ",
+    "stomachPain": "खैंगो गुगुन",
+    "dehydration": "दै खांगनाय",
+    "skinRash": "गामिनजा गुमुंनाय",
+    "eyeInfection": "मैथाय गुरुवगौ",
+    "typhoid": "टाइफाइड",
+    "cholera": "कलेरा",
+    "hepatitis": "हेपाटाइटिस"
+  },
+
+  "waterSources": {
+    "tubeWell": "ट्यूब वेल",
+    "handPump": "हेंड पंप",
+    "openWell": "खुला दै'बोरा",
+    "riverStream": "लुइ/मुसो",
+    "pond": "दिघिर",
+    "tankWater": "टांकि'र दै",
+    "bottledWater": "बटल'र दै"
+  },
+
+  "education": {
+    "title": "हेल्थ सिकिलाम",
+    "subtitle": "गोबां हेल्थ आरो सुरक्षा सुचना",
+    "categories": {
+      "water_safety": "दै'र सुरक्षा",
+      "hygiene": "साफा",
+      "health_awareness": "हेल्थ सुगुर",
+      "community_engagement": "समुदाय संलग्नता",
+      "seasonal_health": "मौसमि हेल्थ"
+    },
+    "noContent": "बे समयावै मुइथा सिकिलाम कन्टेन्ट नाय।",
+    "readMore": "गेदेर पढ़नाय",
+    "readLess": "खाथो पढ़नाय"
+  },
+
+  "feedback": {
+    "title": "मतलब आरो सिकायत",
+    "subtitle": "नों'र सिनथानि आरो सिंगिया सेयार खालाम",
+    "form": {
+      "message": "नों'र खबर",
+      "messagePlaceholder": "नों'र सिनथानि, सिकायत नायथि सिंगिया बायदि...",
+      "submit": "मतलब हाबहोन",
+      "submitting": "हाबहोनगौ..."
+    },
+    "status": {
+      "pending": "बाखिगो",
+      "reviewed": "सेबनायदों",
+      "resolved": "सोमाधान"
+    },
+    "success": "मतलब बावनायै हाबहोनदोंमोन!",
+    "error": "मतलब हाबहोननो हुनायबा। फिन कोसिस खालाम।",
+    "noFeedback": "लाइगो मुइथा मतलब हाबहोनया।",
+    "yourFeedback": "नों'र सिगाङनि मतलब",
+    "allFeedback": "समुदाय'र मतलब",
+    "response": "सरकारि जाब"
+  },
+
+  "messages": {
+    "error": "बुंगौ",
+    "success": "बावनो"
+  }
+}
