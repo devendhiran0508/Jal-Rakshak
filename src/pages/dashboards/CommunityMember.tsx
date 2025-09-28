@@ -7,21 +7,36 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toast } from '@/hooks/use-toast';
 import { Users, AlertTriangle, BookOpen, LogOut, Droplets, Heart } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
+import OfflineIndicator from '@/components/OfflineIndicator';
+import HealthEducation from '@/components/HealthEducation';
+import FeedbackForm from '@/components/FeedbackForm';
+import { useOfflineSync } from '@/hooks/useOfflineSync';
 
 interface Alert {
   id: string;
   message: string;
   target_roles: string[];
   created_at: string;
+  village?: string;
+  type?: string;
+  disease_or_parameter?: string;
+  value?: number;
+  auto?: boolean;
 }
 
 const CommunityMember: React.FC = () => {
   const { profile, signOut } = useAuth();
   const { t } = useTranslation();
   const [alerts, setAlerts] = useState<Alert[]>([]);
+  const { refreshEducationContent } = useOfflineSync();
 
   useEffect(() => {
     fetchAlerts();
+    
+    // Cache education content for offline use
+    if (profile?.role) {
+      refreshEducationContent(profile.role);
+    }
     
     // Set up real-time subscription for alerts
     const channel = supabase
@@ -56,7 +71,7 @@ const CommunityMember: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
+        title: t('messages.error'),
         description: "Failed to fetch alerts",
         variant: "destructive"
       });
@@ -67,23 +82,23 @@ const CommunityMember: React.FC = () => {
 
   const healthEducationContent = [
     {
-      title: "Water Purification Methods",
-      content: "Boil water for at least 1 minute, use water purification tablets, or use proper water filters to ensure safe drinking water.",
+      title: t('community.waterPurificationMethods'),
+      content: t('community.waterPurificationDesc'),
       icon: <Droplets className="h-6 w-6 text-primary" />
     },
     {
-      title: "Preventing Waterborne Diseases",
-      content: "Always wash hands with soap, avoid contaminated water sources, and store water in clean containers with tight lids.",
+      title: t('community.preventingWaterborne'),
+      content: t('community.preventingWaterborneDesc'),
       icon: <Heart className="h-6 w-6 text-secondary" />
     },
     {
-      title: "Recognizing Symptoms",
-      content: "Watch for signs of dehydration, diarrhea, fever, and stomach pain. Seek immediate medical attention for severe symptoms.",
+      title: t('community.recognizingSymptoms'),
+      content: t('community.recognizingSymptomsDesc'),
       icon: <AlertTriangle className="h-6 w-6 text-destructive" />
     },
     {
-      title: "Community Hygiene",
-      content: "Maintain clean surroundings, proper waste disposal, and regular cleaning of water storage areas to prevent disease spread.",
+      title: t('community.communityHygiene'),
+      content: t('community.communityHygieneDesc'),
       icon: <Users className="h-6 w-6 text-accent" />
     }
   ];
@@ -101,6 +116,7 @@ const CommunityMember: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <OfflineIndicator />
             <LanguageToggle />
             <Button onClick={signOut} variant="outline">
               <LogOut className="h-4 w-4 mr-2" />
@@ -116,10 +132,10 @@ const CommunityMember: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <BookOpen className="h-5 w-5 mr-2" />
-                  Health Education
+                  {t('community.healthEducation')}
                 </CardTitle>
                 <CardDescription>
-                  Important information for community health and safety
+                  {t('community.importantInfo')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -145,10 +161,10 @@ const CommunityMember: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <AlertTriangle className="h-5 w-5 mr-2" />
-                Health Alerts ({alerts.length})
+                {t('community.healthAlerts')} ({alerts.length})
               </CardTitle>
               <CardDescription>
-                Important alerts from health officials
+                {t('community.alertsFromOfficials')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -156,19 +172,26 @@ const CommunityMember: React.FC = () => {
                 {alerts.length === 0 ? (
                   <div className="text-center py-8">
                     <AlertTriangle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">No alerts at this time</p>
-                    <p className="text-sm text-muted-foreground">Stay tuned for important health updates</p>
+                    <p className="text-muted-foreground">{t('community.noAlertsNow')}</p>
+                    <p className="text-sm text-muted-foreground">{t('community.stayTuned')}</p>
                   </div>
                 ) : (
                   alerts.map((alert) => (
-                    <div key={alert.id} className="border-l-4 border-destructive bg-destructive/5 p-4 rounded-r-lg">
+                    <div key={alert.id} className={`border-l-4 border-destructive bg-destructive/5 p-4 rounded-r-lg ${alert.auto ? 'border-orange-400 bg-orange-50' : ''}`}>
                       <div className="flex items-start">
                         <AlertTriangle className="h-5 w-5 text-destructive mt-0.5 mr-3 flex-shrink-0" />
                         <div className="flex-1">
                           <p className="text-sm font-medium">{alert.message}</p>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {new Date(alert.created_at).toLocaleString()}
-                          </p>
+                          <div className="flex justify-between items-center mt-1">
+                            <p className="text-xs text-muted-foreground">
+                              {new Date(alert.created_at).toLocaleString()}
+                            </p>
+                            {alert.auto && (
+                              <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">
+                                {t('community.aiPredicted')}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -179,28 +202,33 @@ const CommunityMember: React.FC = () => {
           </Card>
         </div>
 
+        {/* Health Education Section */}
+        <div className="mt-6">
+          <HealthEducation userRole="community" />
+        </div>
+
         {/* Quick Tips */}
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle>Quick Health Tips</CardTitle>
-            <CardDescription>Daily practices for better health</CardDescription>
+            <CardTitle>{t('community.quickHealthTips')}</CardTitle>
+            <CardDescription>{t('community.dailyPractices')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center p-4 bg-primary/10 rounded-lg">
                 <Droplets className="h-8 w-8 text-primary mx-auto mb-2" />
-                <h4 className="font-semibold text-sm">Clean Water</h4>
-                <p className="text-xs text-muted-foreground">Always use purified water for drinking and cooking</p>
+                <h4 className="font-semibold text-sm">{t('community.cleanWater')}</h4>
+                <p className="text-xs text-muted-foreground">{t('community.alwaysUsePurified')}</p>
               </div>
               <div className="text-center p-4 bg-secondary/10 rounded-lg">
                 <Heart className="h-8 w-8 text-secondary mx-auto mb-2" />
-                <h4 className="font-semibold text-sm">Hand Hygiene</h4>
-                <p className="text-xs text-muted-foreground">Wash hands frequently with soap and clean water</p>
+                <h4 className="font-semibold text-sm">{t('community.handHygiene')}</h4>
+                <p className="text-xs text-muted-foreground">{t('community.washHandsFrequently')}</p>
               </div>
               <div className="text-center p-4 bg-accent/10 rounded-lg">
                 <Users className="h-8 w-8 text-accent mx-auto mb-2" />
-                <h4 className="font-semibold text-sm">Community Care</h4>
-                <p className="text-xs text-muted-foreground">Help neighbors and report health concerns</p>
+                <h4 className="font-semibold text-sm">{t('community.communityCare')}</h4>
+                <p className="text-xs text-muted-foreground">{t('community.helpNeighbors')}</p>
               </div>
             </div>
           </CardContent>

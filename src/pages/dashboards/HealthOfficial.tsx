@@ -10,9 +10,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { toast } from '@/hooks/use-toast';
-import { Shield, AlertTriangle, BarChart3, Users, LogOut, Plus } from 'lucide-react';
+import { Shield, AlertTriangle, BarChart3, Users, LogOut, Plus, Brain } from 'lucide-react';
 import { UserRole } from '@/contexts/AuthContext';
 import LanguageToggle from '@/components/LanguageToggle';
+import FeedbackManagement from '@/components/FeedbackManagement';
 
 interface Report {
   id: string;
@@ -21,6 +22,8 @@ interface Report {
   symptoms: string;
   water_source: string;
   created_at: string;
+  submitted_via?: string;
+  asha_id?: string;
 }
 
 interface Alert {
@@ -28,6 +31,11 @@ interface Alert {
   message: string;
   target_roles: UserRole[];
   created_at: string;
+  village?: string;
+  type?: string;
+  disease_or_parameter?: string;
+  value?: number;
+  auto?: boolean;
 }
 
 const HealthOfficial: React.FC = () => {
@@ -35,6 +43,7 @@ const HealthOfficial: React.FC = () => {
   const { t } = useTranslation();
   const [reports, setReports] = useState<Report[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
+  const [predictedOutbreaks, setPredictedOutbreaks] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(false);
   const [alertForm, setAlertForm] = useState({
     message: '',
@@ -44,6 +53,7 @@ const HealthOfficial: React.FC = () => {
   useEffect(() => {
     fetchReports();
     fetchAlerts();
+    fetchPredictedOutbreaks();
     
     // Set up real-time subscriptions
     const reportsChannel = supabase
@@ -71,7 +81,11 @@ const HealthOfficial: React.FC = () => {
           table: 'alerts'
         },
         (payload) => {
-          setAlerts(current => [payload.new as Alert, ...current]);
+          const newAlert = payload.new as Alert;
+          setAlerts(current => [newAlert, ...current]);
+          if (newAlert.auto) {
+            setPredictedOutbreaks(current => [newAlert, ...current]);
+          }
         }
       )
       .subscribe();
@@ -90,8 +104,8 @@ const HealthOfficial: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
-        description: "Failed to fetch reports",
+        title: t('messages.error'),
+        description: t('asha.errorFetchReports'),
         variant: "destructive"
       });
     } else {
@@ -107,12 +121,30 @@ const HealthOfficial: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
+        title: t('messages.error'),
         description: "Failed to fetch alerts",
         variant: "destructive"
       });
     } else {
       setAlerts(data || []);
+    }
+  };
+
+  const fetchPredictedOutbreaks = async () => {
+    const { data, error } = await supabase
+      .from('alerts')
+      .select('*')
+      .eq('auto', true)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      toast({
+        title: t('messages.error'),
+        description: "Failed to fetch predicted outbreaks",
+        variant: "destructive"
+      });
+    } else {
+      setPredictedOutbreaks(data || []);
     }
   };
 
@@ -134,14 +166,14 @@ const HealthOfficial: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
-        description: "Failed to create alert",
+        title: t('messages.error'),
+        description: t('official.errorCreateAlert'),
         variant: "destructive"
       });
     } else {
       toast({
-        title: "Success",
-        description: "Alert created successfully"
+        title: t('messages.success'),
+        description: t('official.alertCreated')
       });
       setAlertForm({ message: '', target_roles: [] });
     }
@@ -206,7 +238,7 @@ const HealthOfficial: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Reports</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('stats.totalReports')}</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -215,7 +247,7 @@ const HealthOfficial: React.FC = () => {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Alerts</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('stats.activeAlerts')}</CardTitle>
               <AlertTriangle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -224,7 +256,7 @@ const HealthOfficial: React.FC = () => {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Affected Villages</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('official.affectedVillages')}</CardTitle>
               <BarChart3 className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -233,11 +265,58 @@ const HealthOfficial: React.FC = () => {
           </Card>
         </div>
 
+        {/* Predicted Outbreaks Section */}
+        {predictedOutbreaks.length > 0 && (
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Brain className="h-5 w-5 mr-2 text-orange-500" />
+                {t('official.predictedOutbreaks')}
+              </CardTitle>
+              <CardDescription>{t('official.aiDetectedAlerts')}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3 max-h-64 overflow-y-auto">
+                {predictedOutbreaks.slice(0, 10).map((outbreak) => (
+                  <div key={outbreak.id} className="border border-orange-200 rounded-lg p-3 bg-orange-50">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-orange-900">{outbreak.message}</p>
+                        {outbreak.village && (
+                          <p className="text-xs text-orange-700 mt-1">
+                            {t('auth.village')}: {outbreak.village}
+                          </p>
+                        )}
+                        {outbreak.disease_or_parameter && (
+                          <p className="text-xs text-orange-700">
+                            {t('official.parameter')}: {outbreak.disease_or_parameter}
+                            {outbreak.value && ` (${outbreak.value})`}
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
+                          {outbreak.type === 'disease_cluster' && t('official.diseaseCluster')}
+                          {outbreak.type === 'water_quality' && t('official.waterQuality')}
+                          {outbreak.type === 'seasonal' && t('official.seasonal')}
+                        </span>
+                        <p className="text-xs text-orange-600 mt-1">
+                          {new Date(outbreak.created_at).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Charts */}
           <Card>
             <CardHeader>
-              <CardTitle>Disease Distribution</CardTitle>
+              <CardTitle>{t('official.diseaseDistribution')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -264,7 +343,7 @@ const HealthOfficial: React.FC = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Cases by Village</CardTitle>
+              <CardTitle>{t('official.casesByVillage')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -285,29 +364,48 @@ const HealthOfficial: React.FC = () => {
           {/* Reports Table */}
           <Card>
             <CardHeader>
-              <CardTitle>Recent Reports</CardTitle>
-              <CardDescription>Latest health reports from ASHA workers</CardDescription>
+              <CardTitle>{t('official.recentReports')}</CardTitle>
+              <CardDescription>{t('official.latestReports')}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="max-h-96 overflow-y-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Patient</TableHead>
-                      <TableHead>Village</TableHead>
-                      <TableHead>Symptoms</TableHead>
-                      <TableHead>Date</TableHead>
+                      <TableHead>{t('official.patient')}</TableHead>
+                      <TableHead>{t('auth.village')}</TableHead>
+                      <TableHead>{t('forms.symptoms')}</TableHead>
+                      <TableHead>{t('official.date')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {reports.slice(0, 10).map((report) => (
-                      <TableRow key={report.id}>
-                        <TableCell className="font-medium">{report.patient_name}</TableCell>
-                        <TableCell>{report.village}</TableCell>
-                        <TableCell className="text-destructive">{report.symptoms}</TableCell>
-                        <TableCell>{new Date(report.created_at).toLocaleDateString()}</TableCell>
-                      </TableRow>
-                    ))}
+                    {reports.slice(0, 10).map((report) => {
+                      const isVillagerReport = report.submitted_via?.includes('villager');
+                      const isSMSReport = report.submitted_via?.includes('SMS');
+                      
+                      return (
+                        <TableRow key={report.id}>
+                          <TableCell className="font-medium">
+                            <div className="flex items-center gap-2">
+                              {report.patient_name}
+                              {isVillagerReport && (
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                                  🧑‍🌾
+                                </span>
+                              )}
+                              {isSMSReport && (
+                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                  📩 SMS
+                                </span>
+                              )}
+                            </div>
+                          </TableCell>
+                          <TableCell>{report.village}</TableCell>
+                          <TableCell className="text-destructive">{report.symptoms}</TableCell>
+                          <TableCell>{new Date(report.created_at).toLocaleDateString()}</TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>
@@ -319,25 +417,25 @@ const HealthOfficial: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Plus className="h-5 w-5 mr-2" />
-                Create Alert
+                {t('official.createAlert')}
               </CardTitle>
-              <CardDescription>Send alerts to specific user groups</CardDescription>
+              <CardDescription>{t('official.sendAlertsToGroups')}</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleCreateAlert} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="message">Alert Message</Label>
+                  <Label htmlFor="message">{t('official.alertMessage')}</Label>
                   <Input
                     id="message"
                     value={alertForm.message}
                     onChange={(e) => setAlertForm({ ...alertForm, message: e.target.value })}
-                    placeholder="Enter alert message..."
+                    placeholder={t('official.enterMessage')}
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Target Roles</Label>
+                  <Label>{t('official.targetRoles')}</Label>
                   <div className="grid grid-cols-2 gap-2">
                     {(['community', 'villager'] as UserRole[]).map((role) => (
                       <Button
@@ -347,32 +445,44 @@ const HealthOfficial: React.FC = () => {
                         onClick={() => toggleRole(role)}
                         className="capitalize"
                       >
-                        {role}
+                        {t(`roles.${role}`)}
                       </Button>
                     ))}
                   </div>
                 </div>
 
                 <Button type="submit" disabled={loading || alertForm.target_roles.length === 0} className="w-full">
-                  {loading ? 'Creating...' : 'Create Alert'}
+                  {loading ? t('official.creating') : t('official.createAlert')}
                 </Button>
               </form>
 
               <div className="mt-6">
-                <h4 className="font-medium mb-2">Recent Alerts</h4>
+                <h4 className="font-medium mb-2">{t('official.recentAlerts')}</h4>
                 <div className="space-y-2 max-h-48 overflow-y-auto">
                   {alerts.slice(0, 5).map((alert) => (
-                    <div key={alert.id} className="border rounded p-2 text-sm">
+                    <div key={alert.id} className={`border rounded p-2 text-sm ${alert.auto ? 'border-orange-200 bg-orange-50' : ''}`}>
                       <p>{alert.message}</p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        To: {alert.target_roles.join(', ')} • {new Date(alert.created_at).toLocaleDateString()}
-                      </p>
+                      <div className="flex justify-between items-center mt-1">
+                        <p className="text-xs text-muted-foreground">
+                          To: {alert.target_roles.join(', ')} • {new Date(alert.created_at).toLocaleDateString()}
+                        </p>
+                        {alert.auto && (
+                          <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">
+                            {t('official.aiGenerated')}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Feedback Management */}
+        <div className="mt-6">
+          <FeedbackManagement />
         </div>
       </div>
     </div>

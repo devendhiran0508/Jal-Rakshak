@@ -16,28 +16,43 @@ export type Database = {
     Tables: {
       alerts: {
         Row: {
+          auto: boolean | null
           created_at: string
           created_by: string
+          disease_or_parameter: string | null
           id: string
           message: string
           target_roles: Database["public"]["Enums"]["user_role"][]
+          type: string | null
           updated_at: string
+          value: number | null
+          village: string | null
         }
         Insert: {
+          auto?: boolean | null
           created_at?: string
           created_by: string
+          disease_or_parameter?: string | null
           id?: string
           message: string
           target_roles: Database["public"]["Enums"]["user_role"][]
+          type?: string | null
           updated_at?: string
+          value?: number | null
+          village?: string | null
         }
         Update: {
+          auto?: boolean | null
           created_at?: string
           created_by?: string
+          disease_or_parameter?: string | null
           id?: string
           message?: string
           target_roles?: Database["public"]["Enums"]["user_role"][]
+          type?: string | null
           updated_at?: string
+          value?: number | null
+          village?: string | null
         }
         Relationships: [
           {
@@ -48,6 +63,78 @@ export type Database = {
             referencedColumns: ["user_id"]
           },
         ]
+      }
+      education: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          priority: number | null
+          target_role: Database["public"]["Enums"]["user_role"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          content: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          priority?: number | null
+          target_role: Database["public"]["Enums"]["user_role"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          priority?: number | null
+          target_role?: Database["public"]["Enums"]["user_role"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      feedback: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          response: string | null
+          status: string | null
+          submitted_by: string
+          updated_at: string
+          village: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          response?: string | null
+          status?: string | null
+          submitted_by: string
+          updated_at?: string
+          village: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          response?: string | null
+          status?: string | null
+          submitted_by?: string
+          updated_at?: string
+          village?: string
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -88,6 +175,7 @@ export type Database = {
           created_at: string
           id: string
           patient_name: string
+          submitted_via: string
           symptoms: string
           updated_at: string
           village: string
@@ -98,6 +186,7 @@ export type Database = {
           created_at?: string
           id?: string
           patient_name: string
+          submitted_via?: string
           symptoms: string
           updated_at?: string
           village: string
@@ -108,6 +197,7 @@ export type Database = {
           created_at?: string
           id?: string
           patient_name?: string
+          submitted_via?: string
           symptoms?: string
           updated_at?: string
           village?: string
