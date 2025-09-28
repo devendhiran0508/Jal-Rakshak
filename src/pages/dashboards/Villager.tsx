@@ -82,7 +82,7 @@ const Villager: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
+        title: t('messages.error'),
         description: "Failed to fetch alerts",
         variant: "destructive"
       });
@@ -100,7 +100,7 @@ const Villager: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
+        title: t('messages.error'),
         description: "Failed to fetch sensor readings",
         variant: "destructive"
       });
@@ -114,11 +114,11 @@ const Villager: React.FC = () => {
     const turbidityOk = turbidity <= 5;
     
     if (phOk && turbidityOk) {
-      return { status: 'Good', color: 'text-green-600', bgColor: 'bg-green-50 border-green-200' };
+      return { status: t('waterMetrics.good'), color: 'text-green-600', bgColor: 'bg-green-50 border-green-200' };
     } else if ((!phOk && (ph >= 6.0 && ph <= 9.0)) || (!turbidityOk && turbidity <= 10)) {
-      return { status: 'Fair', color: 'text-yellow-600', bgColor: 'bg-yellow-50 border-yellow-200' };
+      return { status: t('waterMetrics.fair'), color: 'text-yellow-600', bgColor: 'bg-yellow-50 border-yellow-200' };
     } else {
-      return { status: 'Poor', color: 'text-red-600', bgColor: 'bg-red-50 border-red-200' };
+      return { status: t('waterMetrics.poor'), color: 'text-red-600', bgColor: 'bg-red-50 border-red-200' };
     }
   };
 
@@ -133,7 +133,7 @@ const Villager: React.FC = () => {
             <Home className="h-8 w-8 text-primary mr-3" />
             <div>
               <h1 className="text-2xl font-bold text-primary">{t('roles.villager')} {t('dashboard.overview')}</h1>
-              <p className="text-muted-foreground">{t('dashboard.welcome')}, {profile?.name} from {profile?.village}</p>
+              <p className="text-muted-foreground">{t('dashboard.welcome')}, {profile?.name} {t('villager.from')} {profile?.village}</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -151,10 +151,10 @@ const Villager: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Activity className="h-5 w-5 mr-2" />
-                Water Quality Monitoring
+                {t('villager.waterQualityMonitoring')}
               </CardTitle>
               <CardDescription>
-                Real-time water quality data from sensors
+                {t('villager.realTimeSensorData')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -162,8 +162,8 @@ const Villager: React.FC = () => {
                 {latestReadings.length === 0 ? (
                   <div className="text-center py-8">
                     <Droplets className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">No sensor data available</p>
-                    <p className="text-sm text-muted-foreground">Sensors will be deployed soon</p>
+                    <p className="text-muted-foreground">{t('villager.noSensorData')}</p>
+                    <p className="text-sm text-muted-foreground">{t('villager.sensorsDeployed')}</p>
                   </div>
                 ) : (
                   latestReadings.map((reading) => {
@@ -186,14 +186,14 @@ const Villager: React.FC = () => {
                           <div className="flex items-center space-x-2">
                             <TestTube className="h-4 w-4 text-primary" />
                             <div>
-                              <p className="text-sm font-medium">pH Level</p>
+                              <p className="text-sm font-medium">{t('waterMetrics.ph')}</p>
                               <p className="text-sm text-muted-foreground">{reading.ph}</p>
                             </div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <Thermometer className="h-4 w-4 text-secondary" />
                             <div>
-                              <p className="text-sm font-medium">Turbidity</p>
+                              <p className="text-sm font-medium">{t('waterMetrics.turbidity')}</p>
                               <p className="text-sm text-muted-foreground">{reading.turbidity} NTU</p>
                             </div>
                           </div>
@@ -211,10 +211,10 @@ const Villager: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <AlertTriangle className="h-5 w-5 mr-2" />
-                Health Alerts ({alerts.length})
+                {t('community.healthAlerts')} ({alerts.length})
               </CardTitle>
               <CardDescription>
-                Important alerts from health officials
+                {t('community.alertsFromOfficials')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -222,8 +222,8 @@ const Villager: React.FC = () => {
                 {alerts.length === 0 ? (
                   <div className="text-center py-8">
                     <AlertTriangle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">No alerts at this time</p>
-                    <p className="text-sm text-muted-foreground">Stay safe and healthy!</p>
+                    <p className="text-muted-foreground">{t('villager.noAlertsTime')}</p>
+                    <p className="text-sm text-muted-foreground">{t('villager.staySafeHealthy')}</p>
                   </div>
                 ) : (
                   alerts.map((alert) => (
@@ -248,28 +248,28 @@ const Villager: React.FC = () => {
         {/* Water Quality Guidelines */}
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle>Water Quality Guidelines</CardTitle>
-            <CardDescription>Understanding water quality parameters</CardDescription>
+            <CardTitle>{t('villager.waterQualityGuidelines')}</CardTitle>
+            <CardDescription>{t('villager.understandingParameters')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-semibold mb-3 flex items-center">
                   <TestTube className="h-4 w-4 mr-2 text-primary" />
-                  pH Levels
+                  {t('villager.phLevels')}
                 </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span>Good (6.5 - 8.5)</span>
-                    <span className="text-green-600 font-medium">Safe to drink</span>
+                    <span>{t('villager.goodRange')} (6.5 - 8.5)</span>
+                    <span className="text-green-600 font-medium">{t('villager.safeToDrink')}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Fair (6.0 - 6.4, 8.6 - 9.0)</span>
-                    <span className="text-yellow-600 font-medium">Treat before use</span>
+                    <span>{t('villager.fairRange')} (6.0 - 6.4, 8.6 - 9.0)</span>
+                    <span className="text-yellow-600 font-medium">{t('villager.treatBeforeUse')}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Poor (&lt; 6.0, &gt; 9.0)</span>
-                    <span className="text-red-600 font-medium">Not safe</span>
+                    <span>{t('villager.poorRange')} (&lt; 6.0, &gt; 9.0)</span>
+                    <span className="text-red-600 font-medium">{t('villager.notSafe')}</span>
                   </div>
                 </div>
               </div>
@@ -277,20 +277,20 @@ const Villager: React.FC = () => {
               <div>
                 <h4 className="font-semibold mb-3 flex items-center">
                   <Thermometer className="h-4 w-4 mr-2 text-secondary" />
-                  Turbidity (NTU)
+                  {t('villager.turbidityNTU')}
                 </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span>Good (&lt; 5)</span>
-                    <span className="text-green-600 font-medium">Clear water</span>
+                    <span>{t('villager.goodRange')} (&lt; 5)</span>
+                    <span className="text-green-600 font-medium">{t('villager.clearWater')}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Fair (5 - 10)</span>
-                    <span className="text-yellow-600 font-medium">Slightly cloudy</span>
+                    <span>{t('villager.fairRange')} (5 - 10)</span>
+                    <span className="text-yellow-600 font-medium">{t('villager.slightlyCloudy')}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Poor (&gt; 10)</span>
-                    <span className="text-red-600 font-medium">Very cloudy</span>
+                    <span>{t('villager.poorRange')} (&gt; 10)</span>
+                    <span className="text-red-600 font-medium">{t('villager.veryCloudy')}</span>
                   </div>
                 </div>
               </div>

@@ -90,8 +90,8 @@ const HealthOfficial: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
-        description: "Failed to fetch reports",
+        title: t('messages.error'),
+        description: t('asha.errorFetchReports'),
         variant: "destructive"
       });
     } else {
@@ -107,7 +107,7 @@ const HealthOfficial: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
+        title: t('messages.error'),
         description: "Failed to fetch alerts",
         variant: "destructive"
       });
@@ -134,14 +134,14 @@ const HealthOfficial: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
-        description: "Failed to create alert",
+        title: t('messages.error'),
+        description: t('official.errorCreateAlert'),
         variant: "destructive"
       });
     } else {
       toast({
-        title: "Success",
-        description: "Alert created successfully"
+        title: t('messages.success'),
+        description: t('official.alertCreated')
       });
       setAlertForm({ message: '', target_roles: [] });
     }
@@ -206,7 +206,7 @@ const HealthOfficial: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Reports</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('stats.totalReports')}</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -215,7 +215,7 @@ const HealthOfficial: React.FC = () => {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Alerts</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('stats.activeAlerts')}</CardTitle>
               <AlertTriangle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -224,7 +224,7 @@ const HealthOfficial: React.FC = () => {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Affected Villages</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('official.affectedVillages')}</CardTitle>
               <BarChart3 className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -237,7 +237,7 @@ const HealthOfficial: React.FC = () => {
           {/* Charts */}
           <Card>
             <CardHeader>
-              <CardTitle>Disease Distribution</CardTitle>
+              <CardTitle>{t('official.diseaseDistribution')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -264,7 +264,7 @@ const HealthOfficial: React.FC = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Cases by Village</CardTitle>
+              <CardTitle>{t('official.casesByVillage')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -285,18 +285,18 @@ const HealthOfficial: React.FC = () => {
           {/* Reports Table */}
           <Card>
             <CardHeader>
-              <CardTitle>Recent Reports</CardTitle>
-              <CardDescription>Latest health reports from ASHA workers</CardDescription>
+              <CardTitle>{t('official.recentReports')}</CardTitle>
+              <CardDescription>{t('official.latestReports')}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="max-h-96 overflow-y-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Patient</TableHead>
-                      <TableHead>Village</TableHead>
-                      <TableHead>Symptoms</TableHead>
-                      <TableHead>Date</TableHead>
+                      <TableHead>{t('official.patient')}</TableHead>
+                      <TableHead>{t('auth.village')}</TableHead>
+                      <TableHead>{t('forms.symptoms')}</TableHead>
+                      <TableHead>{t('official.date')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -319,25 +319,25 @@ const HealthOfficial: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Plus className="h-5 w-5 mr-2" />
-                Create Alert
+                {t('official.createAlert')}
               </CardTitle>
-              <CardDescription>Send alerts to specific user groups</CardDescription>
+              <CardDescription>{t('official.sendAlertsToGroups')}</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleCreateAlert} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="message">Alert Message</Label>
+                  <Label htmlFor="message">{t('official.alertMessage')}</Label>
                   <Input
                     id="message"
                     value={alertForm.message}
                     onChange={(e) => setAlertForm({ ...alertForm, message: e.target.value })}
-                    placeholder="Enter alert message..."
+                    placeholder={t('official.enterMessage')}
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Target Roles</Label>
+                  <Label>{t('official.targetRoles')}</Label>
                   <div className="grid grid-cols-2 gap-2">
                     {(['community', 'villager'] as UserRole[]).map((role) => (
                       <Button
@@ -347,19 +347,19 @@ const HealthOfficial: React.FC = () => {
                         onClick={() => toggleRole(role)}
                         className="capitalize"
                       >
-                        {role}
+                        {t(`roles.${role}`)}
                       </Button>
                     ))}
                   </div>
                 </div>
 
                 <Button type="submit" disabled={loading || alertForm.target_roles.length === 0} className="w-full">
-                  {loading ? 'Creating...' : 'Create Alert'}
+                  {loading ? t('official.creating') : t('official.createAlert')}
                 </Button>
               </form>
 
               <div className="mt-6">
-                <h4 className="font-medium mb-2">Recent Alerts</h4>
+                <h4 className="font-medium mb-2">{t('official.recentAlerts')}</h4>
                 <div className="space-y-2 max-h-48 overflow-y-auto">
                   {alerts.slice(0, 5).map((alert) => (
                     <div key={alert.id} className="border rounded p-2 text-sm">

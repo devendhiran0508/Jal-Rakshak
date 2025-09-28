@@ -95,5 +95,117 @@
     "activeAlerts": "Active Alerts",
     "waterSources": "Water Sources",
     "education": "Education Content"
+  },
+
+  "asha": {
+    "submitHealthReport": "Submit Health Report",
+    "reportHealthCases": "Report health cases in your community",
+    "myReports": "My Reports",
+    "submittedReports": "Your submitted health reports",
+    "noReportsYet": "No reports submitted yet",
+    "selectSymptoms": "Select symptoms",
+    "selectWaterSource": "Select water source",
+    "submitting": "Submitting...",
+    "submitReport": "Submit Report",
+    "errorFetchReports": "Failed to fetch reports",
+    "errorSubmitReport": "Failed to submit report",
+    "reportSubmitted": "Health report submitted successfully",
+    "symptomsLabel": "Symptoms:",
+    "waterSourceLabel": "Water Source:"
+  },
+
+  "official": {
+    "diseaseDistribution": "Disease Distribution",
+    "casesByVillage": "Cases by Village",
+    "recentReports": "Recent Reports",
+    "latestReports": "Latest health reports from ASHA workers",
+    "createAlert": "Create Alert",
+    "sendAlertsToGroups": "Send alerts to specific user groups",
+    "alertMessage": "Alert Message",
+    "enterMessage": "Enter alert message...",
+    "targetRoles": "Target Roles",
+    "creating": "Creating...",
+    "alertCreated": "Alert created successfully",
+    "errorCreateAlert": "Failed to create alert",
+    "recentAlerts": "Recent Alerts",
+    "affectedVillages": "Affected Villages",
+    "patient": "Patient",
+    "date": "Date"
+  },
+
+  "community": {
+    "healthEducation": "Health Education",
+    "importantInfo": "Important information for community health and safety",
+    "healthAlerts": "Health Alerts",
+    "alertsFromOfficials": "Important alerts from health officials",
+    "noAlertsNow": "No alerts at this time",
+    "stayTuned": "Stay tuned for important health updates",
+    "quickHealthTips": "Quick Health Tips",
+    "dailyPractices": "Daily practices for better health",
+    "cleanWater": "Clean Water",
+    "alwaysUsePurified": "Always use purified water for drinking and cooking",
+    "handHygiene": "Hand Hygiene",
+    "washHandsFrequently": "Wash hands frequently with soap and clean water",
+    "communityCare": "Community Care",
+    "helpNeighbors": "Help neighbors and report health concerns",
+    "waterPurificationMethods": "Water Purification Methods",
+    "waterPurificationDesc": "Boil water for at least 1 minute, use water purification tablets, or use proper water filters to ensure safe drinking water.",
+    "preventingWaterborne": "Preventing Waterborne Diseases",
+    "preventingWaterborneDesc": "Always wash hands with soap, avoid contaminated water sources, and store water in clean containers with tight lids.",
+    "recognizingSymptoms": "Recognizing Symptoms",
+    "recognizingSymptomsDesc": "Watch for signs of dehydration, diarrhea, fever, and stomach pain. Seek immediate medical attention for severe symptoms.",
+    "communityHygiene": "Community Hygiene",
+    "communityHygieneDesc": "Maintain clean surroundings, proper waste disposal, and regular cleaning of water storage areas to prevent disease spread."
+  },
+
+  "villager": {
+    "waterQualityMonitoring": "Water Quality Monitoring",
+    "realTimeSensorData": "Real-time water quality data from sensors",
+    "noSensorData": "No sensor data available",
+    "sensorsDeployed": "Sensors will be deployed soon",
+    "waterQualityGuidelines": "Water Quality Guidelines",
+    "understandingParameters": "Understanding water quality parameters",
+    "phLevels": "pH Levels",
+    "turbidityNTU": "Turbidity (NTU)",
+    "goodRange": "Good",
+    "fairRange": "Fair",
+    "poorRange": "Poor",
+    "safeToDrink": "Safe to drink",
+    "treatBeforeUse": "Treat before use",
+    "notSafe": "Not safe",
+    "clearWater": "Clear water",
+    "slightlyCloudy": "Slightly cloudy",
+    "veryCloudy": "Very cloudy",
+    "noAlertsTime": "No alerts at this time",
+    "staySafeHealthy": "Stay safe and healthy!",
+    "from": "from"
+  },
+
+  "symptoms": {
+    "diarrhea": "Diarrhea",
+    "vomiting": "Vomiting",
+    "fever": "Fever",
+    "stomachPain": "Stomach Pain",
+    "dehydration": "Dehydration",
+    "skinRash": "Skin Rash",
+    "eyeInfection": "Eye Infection",
+    "typhoid": "Typhoid",
+    "cholera": "Cholera",
+    "hepatitis": "Hepatitis"
+  },
+
+  "waterSources": {
+    "tubeWell": "Tube Well",
+    "handPump": "Hand Pump",
+    "openWell": "Open Well",
+    "riverStream": "River/Stream",
+    "pond": "Pond",
+    "tankWater": "Tank Water",
+    "bottledWater": "Bottled Water"
+  },
+
+  "messages": {
+    "error": "Error",
+    "success": "Success"
   }
 }

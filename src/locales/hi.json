@@ -95,5 +95,117 @@
     "activeAlerts": "सक्रिय अलर्ट",
     "waterSources": "पानी के स्रोत",
     "education": "शिक्षा सामग्री"
+  },
+
+  "asha": {
+    "submitHealthReport": "स्वास्थ्य रिपोर्ट जमा करें",
+    "reportHealthCases": "अपने समुदाय में स्वास्थ्य मामलों की रिपोर्ट करें",
+    "myReports": "मेरी रिपोर्ट",
+    "submittedReports": "आपकी जमा की गई स्वास्थ्य रिपोर्ट",
+    "noReportsYet": "अभी तक कोई रिपोर्ट जमा नहीं की गई",
+    "selectSymptoms": "लक्षण चुनें",
+    "selectWaterSource": "पानी का स्रोत चुनें",
+    "submitting": "जमा कर रहे हैं...",
+    "submitReport": "रिपोर्ट जमा करें",
+    "errorFetchReports": "रिपोर्ट लाने में विफल",
+    "errorSubmitReport": "रिपोर्ट जमा करने में विफल",
+    "reportSubmitted": "स्वास्थ्य रिपोर्ट सफलतापूर्वक जमा की गई",
+    "symptomsLabel": "लक्षण:",
+    "waterSourceLabel": "पानी का स्रोत:"
+  },
+
+  "official": {
+    "diseaseDistribution": "रोग वितरण",
+    "casesByVillage": "गांव के अनुसार मामले",
+    "recentReports": "हाल की रिपोर्ट",
+    "latestReports": "आशा कार्यकर्ताओं से नवीनतम स्वास्थ्य रिपोर्ट",
+    "createAlert": "अलर्ट बनाएं",
+    "sendAlertsToGroups": "विशिष्ट उपयोगकर्ता समूहों को अलर्ट भेजें",
+    "alertMessage": "अलर्ट संदेश",
+    "enterMessage": "अलर्ट संदेश दर्ज करें...",
+    "targetRoles": "लक्षित भूमिकाएं",
+    "creating": "बना रहे हैं...",
+    "alertCreated": "अलर्ट सफलतापूर्वक बनाया गया",
+    "errorCreateAlert": "अलर्ट बनाने में विफल",
+    "recentAlerts": "हाल के अलर्ट",
+    "affectedVillages": "प्रभावित गांव",
+    "patient": "मरीज़",
+    "date": "तारीख"
+  },
+
+  "community": {
+    "healthEducation": "स्वास्थ्य शिक्षा",
+    "importantInfo": "सामुदायिक स्वास्थ्य और सुरक्षा के लिए महत्वपूर्ण जानकारी",
+    "healthAlerts": "स्वास्थ्य अलर्ट",
+    "alertsFromOfficials": "स्वास्थ्य अधिकारियों से महत्वपूर्ण अलर्ट",
+    "noAlertsNow": "इस समय कोई अलर्ट नहीं",
+    "stayTuned": "महत्वपूर्ण स्वास्थ्य अपडेट के लिए बने रहें",
+    "quickHealthTips": "त्वरित स्वास्थ्य सुझाव",
+    "dailyPractices": "बेहतर स्वास्थ्य के लिए दैनिक प्रथाएं",
+    "cleanWater": "स्वच्छ पानी",
+    "alwaysUsePurified": "पीने और खाना पकाने के लिए हमेशा शुद्ध पानी का उपयोग करें",
+    "handHygiene": "हाथ की स्वच्छता",
+    "washHandsFrequently": "साबुन और स्वच्छ पानी से बार-बार हाथ धोएं",
+    "communityCare": "सामुदायिक देखभाल",
+    "helpNeighbors": "पड़ोसियों की मदद करें और स्वास्थ्य चिंताओं की रिपोर्ट करें",
+    "waterPurificationMethods": "पानी शुद्धीकरण विधियां",
+    "waterPurificationDesc": "कम से कम 1 मिनट के लिए पानी उबालें, पानी शुद्धीकरण गोलियों का उपयोग करें, या सुरक्षित पेयजल सुनिश्चित करने के लिए उचित पानी फिल्टर का उपयोग करें।",
+    "preventingWaterborne": "जलजनित रोगों की रोकथाम",
+    "preventingWaterborneDesc": "हमेशा साबुन से हाथ धोएं, दूषित पानी के स्रोतों से बचें, और पानी को टाइट ढक्कन वाले साफ कंटेनर में स्टोर करें।",
+    "recognizingSymptoms": "लक्षणों को पहचानना",
+    "recognizingSymptomsDesc": "निर्जलीकरण, दस्त, बुखार और पेट दर्द के संकेतों पर ध्यान दें। गंभीर लक्षणों के लिए तुरंत चिकित्सा सहायता लें।",
+    "communityHygiene": "सामुदायिक स्वच्छता",
+    "communityHygieneDesc": "स्वच्छ परिवेश बनाए रखें, उचित अपशिष्ट निपटान करें, और रोग फैलने से रोकने के लिए पानी भंडारण क्षेत्रों की नियमित सफाई करें।"
+  },
+
+  "villager": {
+    "waterQualityMonitoring": "पानी की गुणवत्ता निगरानी",
+    "realTimeSensorData": "सेंसर से वास्तविक समय पानी गुणवत्ता डेटा",
+    "noSensorData": "कोई सेंसर डेटा उपलब्ध नहीं",
+    "sensorsDeployed": "सेंसर जल्द ही तैनात किए जाएंगे",
+    "waterQualityGuidelines": "पानी गुणवत्ता दिशानिर्देश",
+    "understandingParameters": "पानी गुणवत्ता मापदंडों को समझना",
+    "phLevels": "pH स्तर",
+    "turbidityNTU": "टर्बिडिटी (NTU)",
+    "goodRange": "अच्छा",
+    "fairRange": "ठीक",
+    "poorRange": "खराब",
+    "safeToDrink": "पीने के लिए सुरक्षित",
+    "treatBeforeUse": "उपयोग से पहले उपचार करें",
+    "notSafe": "सुरक्षित नहीं",
+    "clearWater": "स्वच्छ पानी",
+    "slightlyCloudy": "थोड़ा धुंधला",
+    "veryCloudy": "बहुत धुंधला",
+    "noAlertsTime": "इस समय कोई अलर्ट नहीं",
+    "staySafeHealthy": "सुरक्षित और स्वस्थ रहें!",
+    "from": "से"
+  },
+
+  "symptoms": {
+    "diarrhea": "दस्त",
+    "vomiting": "उल्टी",
+    "fever": "बुखार",
+    "stomachPain": "पेट दर्द",
+    "dehydration": "निर्जलीकरण",
+    "skinRash": "त्वचा पर चकत्ते",
+    "eyeInfection": "आंखों का संक्रमण",
+    "typhoid": "टाइफाइड",
+    "cholera": "हैजा",
+    "hepatitis": "हेपेटाइटिस"
+  },
+
+  "waterSources": {
+    "tubeWell": "ट्यूब वेल",
+    "handPump": "हैंड पंप",
+    "openWell": "खुला कुआं",
+    "riverStream": "नदी/धारा",
+    "pond": "तालाब",
+    "tankWater": "टैंक का पानी",
+    "bottledWater": "बोतल का पानी"
+  },
+
+  "messages": {
+    "error": "त्रुटि",
+    "success": "सफलता"
   }
 }

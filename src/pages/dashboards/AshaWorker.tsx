@@ -68,8 +68,8 @@ const AshaWorker: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
-        description: "Failed to fetch reports",
+        title: t('messages.error'),
+        description: t('asha.errorFetchReports'),
         variant: "destructive"
       });
     } else {
@@ -97,14 +97,14 @@ const AshaWorker: React.FC = () => {
 
     if (error) {
       toast({
-        title: "Error",
-        description: "Failed to submit report",
+        title: t('messages.error'),
+        description: t('asha.errorSubmitReport'),
         variant: "destructive"
       });
     } else {
       toast({
-        title: "Success",
-        description: "Health report submitted successfully"
+        title: t('messages.success'),
+        description: t('asha.reportSubmitted')
       });
       setFormData({
         patient_name: '',
@@ -118,26 +118,26 @@ const AshaWorker: React.FC = () => {
   };
 
   const symptomsOptions = [
-    'Diarrhea',
-    'Vomiting',
-    'Fever',
-    'Stomach Pain',
-    'Dehydration',
-    'Skin Rash',
-    'Eye Infection',
-    'Typhoid',
-    'Cholera',
-    'Hepatitis'
+    { key: 'diarrhea', label: t('symptoms.diarrhea') },
+    { key: 'vomiting', label: t('symptoms.vomiting') },
+    { key: 'fever', label: t('symptoms.fever') },
+    { key: 'stomachPain', label: t('symptoms.stomachPain') },
+    { key: 'dehydration', label: t('symptoms.dehydration') },
+    { key: 'skinRash', label: t('symptoms.skinRash') },
+    { key: 'eyeInfection', label: t('symptoms.eyeInfection') },
+    { key: 'typhoid', label: t('symptoms.typhoid') },
+    { key: 'cholera', label: t('symptoms.cholera') },
+    { key: 'hepatitis', label: t('symptoms.hepatitis') }
   ];
 
   const waterSourceOptions = [
-    'Tube Well',
-    'Hand Pump',
-    'Open Well',
-    'River/Stream',
-    'Pond',
-    'Tank Water',
-    'Bottled Water'
+    { key: 'tubeWell', label: t('waterSources.tubeWell') },
+    { key: 'handPump', label: t('waterSources.handPump') },
+    { key: 'openWell', label: t('waterSources.openWell') },
+    { key: 'riverStream', label: t('waterSources.riverStream') },
+    { key: 'pond', label: t('waterSources.pond') },
+    { key: 'tankWater', label: t('waterSources.tankWater') },
+    { key: 'bottledWater', label: t('waterSources.bottledWater') }
   ];
 
   return (
@@ -167,16 +167,16 @@ const AshaWorker: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Plus className="h-5 w-5 mr-2" />
-                Submit Health Report
+                {t('asha.submitHealthReport')}
               </CardTitle>
               <CardDescription>
-                Report health cases in your community
+                {t('asha.reportHealthCases')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="patient_name">Patient Name</Label>
+                  <Label htmlFor="patient_name">{t('forms.patientName')}</Label>
                   <Input
                     id="patient_name"
                     value={formData.patient_name}
@@ -186,7 +186,7 @@ const AshaWorker: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="village">Village</Label>
+                  <Label htmlFor="village">{t('auth.village')}</Label>
                   <Input
                     id="village"
                     value={formData.village}
@@ -196,15 +196,15 @@ const AshaWorker: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="symptoms">Symptoms</Label>
+                  <Label htmlFor="symptoms">{t('forms.symptoms')}</Label>
                   <Select onValueChange={(value) => setFormData({ ...formData, symptoms: value })}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select symptoms" />
+                      <SelectValue placeholder={t('asha.selectSymptoms')} />
                     </SelectTrigger>
                     <SelectContent>
                       {symptomsOptions.map((symptom) => (
-                        <SelectItem key={symptom} value={symptom}>
-                          {symptom}
+                        <SelectItem key={symptom.key} value={symptom.label}>
+                          {symptom.label}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -212,15 +212,15 @@ const AshaWorker: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="water_source">Water Source</Label>
+                  <Label htmlFor="water_source">{t('forms.waterSource', { defaultValue: 'Water Source' })}</Label>
                   <Select onValueChange={(value) => setFormData({ ...formData, water_source: value })}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select water source" />
+                      <SelectValue placeholder={t('asha.selectWaterSource')} />
                     </SelectTrigger>
                     <SelectContent>
                       {waterSourceOptions.map((source) => (
-                        <SelectItem key={source} value={source}>
-                          {source}
+                        <SelectItem key={source.key} value={source.label}>
+                          {source.label}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -228,7 +228,7 @@ const AshaWorker: React.FC = () => {
                 </div>
 
                 <Button type="submit" disabled={loading} className="w-full">
-                  {loading ? 'Submitting...' : 'Submit Report'}
+                  {loading ? t('asha.submitting') : t('asha.submitReport')}
                 </Button>
               </form>
             </CardContent>
@@ -239,17 +239,17 @@ const AshaWorker: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <FileText className="h-5 w-5 mr-2" />
-                My Reports ({reports.length})
+                {t('asha.myReports')} ({reports.length})
               </CardTitle>
               <CardDescription>
-                Your submitted health reports
+                {t('asha.submittedReports')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {reports.length === 0 ? (
                   <p className="text-muted-foreground text-center py-8">
-                    No reports submitted yet
+                    {t('asha.noReportsYet')}
                   </p>
                 ) : (
                   reports.map((report) => (
@@ -260,12 +260,12 @@ const AshaWorker: React.FC = () => {
                           {new Date(report.created_at).toLocaleDateString()}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">Village: {report.village}</p>
+                      <p className="text-sm text-muted-foreground">{t('auth.village')}: {report.village}</p>
                       <p className="text-sm">
-                        <span className="font-medium text-destructive">Symptoms:</span> {report.symptoms}
+                        <span className="font-medium text-destructive">{t('asha.symptomsLabel')}</span> {report.symptoms}
                       </p>
                       <p className="text-sm">
-                        <span className="font-medium text-primary">Water Source:</span> {report.water_source}
+                        <span className="font-medium text-primary">{t('asha.waterSourceLabel')}</span> {report.water_source}
                       </p>
                     </div>
                   ))
