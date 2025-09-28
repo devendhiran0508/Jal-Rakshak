@@ -140,7 +140,11 @@
     "errorSubmitReport": "Failed to submit report",
     "reportSubmitted": "Health report submitted successfully",
     "symptomsLabel": "Symptoms:",
-    "waterSourceLabel": "Water Source:"
+    "waterSourceLabel": "Water Source:",
+    "alerts": "Alerts",
+    "importantAlerts": "Important health alerts and predictions",
+    "noAlertsYet": "No alerts at this time",
+    "aiPredicted": "AI Predicted"
   },
 
   "official": {
@@ -191,7 +195,8 @@
     "recognizingSymptoms": "Recognizing Symptoms",
     "recognizingSymptomsDesc": "Watch for signs of dehydration, diarrhea, fever, and stomach pain. Seek immediate medical attention for severe symptoms.",
     "communityHygiene": "Community Hygiene",
-    "communityHygieneDesc": "Maintain clean surroundings, proper waste disposal, and regular cleaning of water storage areas to prevent disease spread."
+    "communityHygieneDesc": "Maintain clean surroundings, proper waste disposal, and regular cleaning of water storage areas to prevent disease spread.",
+    "aiPredicted": "AI Predicted"
   },
 
   "villager": {

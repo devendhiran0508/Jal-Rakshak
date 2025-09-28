@@ -140,9 +140,13 @@
     "submitReport": "रिपर्ट हाबहोन",
     "errorFetchReports": "रिपर्टसोर अननो हुनायबा",
     "errorSubmitReport": "रिपर्ट हाबहोननो हुनायबा",
-    "reportSubmitted": "हेल्थ रिपर्ट बावनायै हाबहोनदोंमोन",
-    "symptomsLabel": "लाखोसोर:",
-    "waterSourceLabel": "दै'र सोमोन:"
+    "reportSubmitted": "सुगुन रिपोर्ट फुरादै जमा खालामनाय",
+    "symptomsLabel": "लासखन समुह:",
+    "waterSourceLabel": "दावगिरि गोजोन:",
+    "alerts": "सावदान",
+    "importantAlerts": "महतारि सुगुन सावदान आरो उनथाव",
+    "noAlertsYet": "बे समाव सावदान नङा",
+    "aiPredicted": "AI उनथाव"
   },
 
   "official": {
@@ -193,7 +197,8 @@
     "recognizingSymptoms": "लाखोसोर संजानाय",
     "recognizingSymptomsDesc": "दै खांगनाय, ढिरां-गुं, नागौ आरो खैंगो गुगुन लाखोसोर नायनाय। रागथानि लाखोसोर'फोर उल्टा डाक्तारआव दानाय।",
     "communityHygiene": "समुदाय साफा",
-    "communityHygieneDesc": "बेमार जोगोसारि सावनानो साफ बारिगोराइ, बावनो फिसा थांनाय आरो दै थिनाय जागाखौ'र नियमित सफाइ राखै।"
+    "communityHygieneDesc": "बेमार जोगोसारि सावनानो साफ बारिगोराइ, बावनो फिसा थांनाय आरो दै थिनाय जागाखौ'र नियमित सफाइ राखै।",
+    "aiPredicted": "AI उनथाव"
   },
 
   "villager": {
