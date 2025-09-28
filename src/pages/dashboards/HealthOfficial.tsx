@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { toast } from '@/hooks/use-toast';
-import { Shield, AlertTriangle, BarChart3, Users, LogOut, Plus } from 'lucide-react';
+import { Shield, AlertTriangle, BarChart3, Users, LogOut, Plus, Brain } from 'lucide-react';
 import { UserRole } from '@/contexts/AuthContext';
 import LanguageToggle from '@/components/LanguageToggle';
 
@@ -28,6 +28,11 @@ interface Alert {
   message: string;
   target_roles: UserRole[];
   created_at: string;
+  village?: string;
+  type?: string;
+  disease_or_parameter?: string;
+  value?: number;
+  auto?: boolean;
 }
 
 const HealthOfficial: React.FC = () => {
@@ -35,6 +40,7 @@ const HealthOfficial: React.FC = () => {
   const { t } = useTranslation();
   const [reports, setReports] = useState<Report[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
+  const [predictedOutbreaks, setPredictedOutbreaks] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(false);
   const [alertForm, setAlertForm] = useState({
     message: '',
@@ -44,6 +50,7 @@ const HealthOfficial: React.FC = () => {
   useEffect(() => {
     fetchReports();
     fetchAlerts();
+    fetchPredictedOutbreaks();
     
     // Set up real-time subscriptions
     const reportsChannel = supabase
@@ -71,7 +78,11 @@ const HealthOfficial: React.FC = () => {
           table: 'alerts'
         },
         (payload) => {
-          setAlerts(current => [payload.new as Alert, ...current]);
+          const newAlert = payload.new as Alert;
+          setAlerts(current => [newAlert, ...current]);
+          if (newAlert.auto) {
+            setPredictedOutbreaks(current => [newAlert, ...current]);
+          }
         }
       )
       .subscribe();
@@ -113,6 +124,24 @@ const HealthOfficial: React.FC = () => {
       });
     } else {
       setAlerts(data || []);
+    }
+  };
+
+  const fetchPredictedOutbreaks = async () => {
+    const { data, error } = await supabase
+      .from('alerts')
+      .select('*')
+      .eq('auto', true)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      toast({
+        title: t('messages.error'),
+        description: "Failed to fetch predicted outbreaks",
+        variant: "destructive"
+      });
+    } else {
+      setPredictedOutbreaks(data || []);
     }
   };
 
@@ -232,6 +261,53 @@ const HealthOfficial: React.FC = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Predicted Outbreaks Section */}
+        {predictedOutbreaks.length > 0 && (
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Brain className="h-5 w-5 mr-2 text-orange-500" />
+                {t('official.predictedOutbreaks')}
+              </CardTitle>
+              <CardDescription>{t('official.aiDetectedAlerts')}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3 max-h-64 overflow-y-auto">
+                {predictedOutbreaks.slice(0, 10).map((outbreak) => (
+                  <div key={outbreak.id} className="border border-orange-200 rounded-lg p-3 bg-orange-50">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-orange-900">{outbreak.message}</p>
+                        {outbreak.village && (
+                          <p className="text-xs text-orange-700 mt-1">
+                            {t('auth.village')}: {outbreak.village}
+                          </p>
+                        )}
+                        {outbreak.disease_or_parameter && (
+                          <p className="text-xs text-orange-700">
+                            {t('official.parameter')}: {outbreak.disease_or_parameter}
+                            {outbreak.value && ` (${outbreak.value})`}
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
+                          {outbreak.type === 'disease_cluster' && t('official.diseaseCluster')}
+                          {outbreak.type === 'water_quality' && t('official.waterQuality')}
+                          {outbreak.type === 'seasonal' && t('official.seasonal')}
+                        </span>
+                        <p className="text-xs text-orange-600 mt-1">
+                          {new Date(outbreak.created_at).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Charts */}
@@ -362,11 +438,18 @@ const HealthOfficial: React.FC = () => {
                 <h4 className="font-medium mb-2">{t('official.recentAlerts')}</h4>
                 <div className="space-y-2 max-h-48 overflow-y-auto">
                   {alerts.slice(0, 5).map((alert) => (
-                    <div key={alert.id} className="border rounded p-2 text-sm">
+                    <div key={alert.id} className={`border rounded p-2 text-sm ${alert.auto ? 'border-orange-200 bg-orange-50' : ''}`}>
                       <p>{alert.message}</p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        To: {alert.target_roles.join(', ')} • {new Date(alert.created_at).toLocaleDateString()}
-                      </p>
+                      <div className="flex justify-between items-center mt-1">
+                        <p className="text-xs text-muted-foreground">
+                          To: {alert.target_roles.join(', ')} • {new Date(alert.created_at).toLocaleDateString()}
+                        </p>
+                        {alert.auto && (
+                          <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">
+                            {t('official.aiGenerated')}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>

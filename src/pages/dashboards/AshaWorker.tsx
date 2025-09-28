@@ -8,8 +8,10 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
-import { Heart, Plus, FileText, LogOut } from 'lucide-react';
+import { Heart, Plus, FileText, LogOut, AlertTriangle } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
+import { runOutbreakDetection } from '@/utils/outbreakDetection';
+import { UserRole } from '@/contexts/AuthContext';
 
 interface Report {
   id: string;
@@ -20,10 +22,23 @@ interface Report {
   created_at: string;
 }
 
+interface Alert {
+  id: string;
+  message: string;
+  target_roles: UserRole[];
+  created_at: string;
+  village?: string;
+  type?: string;
+  disease_or_parameter?: string;
+  value?: number;
+  auto?: boolean;
+}
+
 const AshaWorker: React.FC = () => {
   const { profile, signOut } = useAuth();
   const { t } = useTranslation();
   const [reports, setReports] = useState<Report[]>([]);
+  const [alerts, setAlerts] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     patient_name: '',
@@ -34,6 +49,7 @@ const AshaWorker: React.FC = () => {
 
   useEffect(() => {
     fetchReports();
+    fetchAlerts();
     
     // Set up real-time subscription
     const channel = supabase
@@ -52,10 +68,29 @@ const AshaWorker: React.FC = () => {
       )
       .subscribe();
 
+    const alertsChannel = supabase
+      .channel('asha-alerts')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'alerts'
+        },
+        (payload) => {
+          const newAlert = payload.new as Alert;
+          if (profile?.role && newAlert.target_roles.includes(profile.role)) {
+            setAlerts(current => [newAlert, ...current]);
+          }
+        }
+      )
+      .subscribe();
+
     return () => {
       supabase.removeChannel(channel);
+      supabase.removeChannel(alertsChannel);
     };
-  }, [profile?.user_id]);
+  }, [profile?.user_id, profile?.role]);
 
   const fetchReports = async () => {
     if (!profile?.user_id) return;
@@ -112,9 +147,35 @@ const AshaWorker: React.FC = () => {
         symptoms: '',
         water_source: ''
       });
+      
+      // Run outbreak detection after successful report submission
+      await runOutbreakDetection({
+        village: formData.village,
+        symptoms: formData.symptoms
+      });
     }
 
     setLoading(false);
+  };
+
+  const fetchAlerts = async () => {
+    if (!profile?.role) return;
+
+    const { data, error } = await supabase
+      .from('alerts')
+      .select('*')
+      .contains('target_roles', [profile.role])
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      toast({
+        title: t('messages.error'),
+        description: "Failed to fetch alerts",
+        variant: "destructive"
+      });
+    } else {
+      setAlerts(data || []);
+    }
   };
 
   const symptomsOptions = [
@@ -161,7 +222,7 @@ const AshaWorker: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Report Form */}
           <Card>
             <CardHeader>
@@ -269,6 +330,43 @@ const AshaWorker: React.FC = () => {
                       </p>
                     </div>
                   ))
+                )}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Alerts */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <AlertTriangle className="h-5 w-5 mr-2" />
+                {t('asha.alerts')}
+              </CardTitle>
+              <CardDescription>
+                {t('asha.importantAlerts')}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2 max-h-96 overflow-y-auto">
+                {alerts.slice(0, 5).map((alert) => (
+                  <div key={alert.id} className={`border rounded p-2 text-sm ${alert.auto ? 'border-orange-200 bg-orange-50' : ''}`}>
+                    <p>{alert.message}</p>
+                    <div className="flex justify-between items-center mt-1">
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(alert.created_at).toLocaleDateString()}
+                      </p>
+                      {alert.auto && (
+                        <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">
+                          {t('asha.aiPredicted')}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                {alerts.length === 0 && (
+                  <p className="text-muted-foreground text-center py-4">
+                    {t('asha.noAlertsYet')}
+                  </p>
                 )}
               </div>
             </CardContent>

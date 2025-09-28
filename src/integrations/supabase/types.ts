@@ -16,28 +16,43 @@ export type Database = {
     Tables: {
       alerts: {
         Row: {
+          auto: boolean | null
           created_at: string
           created_by: string
+          disease_or_parameter: string | null
           id: string
           message: string
           target_roles: Database["public"]["Enums"]["user_role"][]
+          type: string | null
           updated_at: string
+          value: number | null
+          village: string | null
         }
         Insert: {
+          auto?: boolean | null
           created_at?: string
           created_by: string
+          disease_or_parameter?: string | null
           id?: string
           message: string
           target_roles: Database["public"]["Enums"]["user_role"][]
+          type?: string | null
           updated_at?: string
+          value?: number | null
+          village?: string | null
         }
         Update: {
+          auto?: boolean | null
           created_at?: string
           created_by?: string
+          disease_or_parameter?: string | null
           id?: string
           message?: string
           target_roles?: Database["public"]["Enums"]["user_role"][]
+          type?: string | null
           updated_at?: string
+          value?: number | null
+          village?: string | null
         }
         Relationships: [
           {

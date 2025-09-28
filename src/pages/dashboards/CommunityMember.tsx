@@ -13,6 +13,11 @@ interface Alert {
   message: string;
   target_roles: string[];
   created_at: string;
+  village?: string;
+  type?: string;
+  disease_or_parameter?: string;
+  value?: number;
+  auto?: boolean;
 }
 
 const CommunityMember: React.FC = () => {
@@ -161,14 +166,21 @@ const CommunityMember: React.FC = () => {
                   </div>
                 ) : (
                   alerts.map((alert) => (
-                    <div key={alert.id} className="border-l-4 border-destructive bg-destructive/5 p-4 rounded-r-lg">
+                    <div key={alert.id} className={`border-l-4 border-destructive bg-destructive/5 p-4 rounded-r-lg ${alert.auto ? 'border-orange-400 bg-orange-50' : ''}`}>
                       <div className="flex items-start">
                         <AlertTriangle className="h-5 w-5 text-destructive mt-0.5 mr-3 flex-shrink-0" />
                         <div className="flex-1">
                           <p className="text-sm font-medium">{alert.message}</p>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {new Date(alert.created_at).toLocaleString()}
-                          </p>
+                          <div className="flex justify-between items-center mt-1">
+                            <p className="text-xs text-muted-foreground">
+                              {new Date(alert.created_at).toLocaleString()}
+                            </p>
+                            {alert.auto && (
+                              <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded">
+                                {t('community.aiPredicted')}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
