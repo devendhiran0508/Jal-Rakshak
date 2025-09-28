@@ -1,44 +1,47 @@
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Droplets, Heart, Users, Home, Shield, ArrowRight } from 'lucide-react';
+import LanguageToggle from '@/components/LanguageToggle';
 
 const Index = () => {
   const { user, profile } = useAuth();
+  const { t } = useTranslation();
 
   // If user is logged in, redirect to their dashboard
-  if (user && profile) {
+  if (user && profile && profile.role) {
     return <Navigate to={`/dashboard/${profile.role}`} replace />;
   }
 
   const roles = [
     {
       key: 'asha',
-      title: 'ASHA Worker',
-      description: 'Submit health reports and monitor community health',
+      title: t('roles.asha'),
+      description: t('roles.ashaDescription'),
       icon: <Heart className="h-12 w-12 text-primary" />,
       color: 'from-red-100 to-pink-100'
     },
     {
       key: 'official',
-      title: 'Health Official',
-      description: 'Monitor reports, analyze data, and send alerts',
+      title: t('roles.official'),
+      description: t('roles.officialDescription'),
       icon: <Shield className="h-12 w-12 text-secondary" />,
       color: 'from-blue-100 to-indigo-100'
     },
     {
       key: 'community',
-      title: 'Community Member',
-      description: 'Access health education and receive alerts',
+      title: t('roles.community'),
+      description: t('roles.communityDescription'),
       icon: <Users className="h-12 w-12 text-accent" />,
       color: 'from-green-100 to-emerald-100'
     },
     {
       key: 'villager',
-      title: 'Villager',
-      description: 'Monitor water quality and receive health alerts',
+      title: t('roles.villager'),
+      description: t('roles.villagerDescription'),
       icon: <Home className="h-12 w-12 text-orange-500" />,
       color: 'from-yellow-100 to-orange-100'
     }
@@ -52,24 +55,23 @@ const Index = () => {
           <div className="flex items-center justify-center mb-8">
             <Droplets className="h-16 w-16 text-primary mr-4" />
             <div>
-              <h1 className="text-5xl font-bold text-primary mb-2">Jal Rakshak</h1>
-              <p className="text-xl text-secondary font-semibold">Water & Health Guardian</p>
+              <h1 className="text-5xl font-bold text-primary mb-2">{t('appName')}</h1>
+              <p className="text-xl text-secondary font-semibold">{t('appSubtitle')}</p>
             </div>
           </div>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            A comprehensive platform for monitoring water quality and community health. 
-            Empowering ASHA workers, health officials, and communities to work together 
-            for better health outcomes.
+            {t('appDescription')}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button asChild size="lg" className="text-lg">
               <Link to="/auth">
-                Get Started
+                {t('getStarted')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
+            <LanguageToggle />
           </div>
         </div>
 
@@ -97,11 +99,11 @@ const Index = () => {
           <Card className="text-center">
             <CardHeader>
               <Heart className="h-12 w-12 text-primary mx-auto mb-4" />
-              <CardTitle>Health Monitoring</CardTitle>
+              <CardTitle>{t('features.healthMonitoring')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Real-time health report submission and monitoring system for community health workers
+                {t('features.healthMonitoringDesc')}
               </p>
             </CardContent>
           </Card>
@@ -109,11 +111,11 @@ const Index = () => {
           <Card className="text-center">
             <CardHeader>
               <Droplets className="h-12 w-12 text-secondary mx-auto mb-4" />
-              <CardTitle>Water Quality</CardTitle>
+              <CardTitle>{t('features.waterQuality')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Live sensor data monitoring pH levels and turbidity for safe drinking water
+                {t('features.waterQualityDesc')}
               </p>
             </CardContent>
           </Card>
@@ -121,11 +123,11 @@ const Index = () => {
           <Card className="text-center">
             <CardHeader>
               <Shield className="h-12 w-12 text-accent mx-auto mb-4" />
-              <CardTitle>Alert System</CardTitle>
+              <CardTitle>{t('features.alertSystem')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Instant alerts and health education content delivery to communities
+                {t('features.alertSystemDesc')}
               </p>
             </CardContent>
           </Card>

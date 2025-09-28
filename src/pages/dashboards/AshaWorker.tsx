@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
 import { Heart, Plus, FileText, LogOut } from 'lucide-react';
+import LanguageToggle from '@/components/LanguageToggle';
 
 interface Report {
   id: string;
@@ -20,6 +22,7 @@ interface Report {
 
 const AshaWorker: React.FC = () => {
   const { profile, signOut } = useAuth();
+  const { t } = useTranslation();
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -145,14 +148,17 @@ const AshaWorker: React.FC = () => {
           <div className="flex items-center">
             <Heart className="h-8 w-8 text-primary mr-3" />
             <div>
-              <h1 className="text-2xl font-bold text-primary">ASHA Worker Dashboard</h1>
-              <p className="text-muted-foreground">Welcome, {profile?.name}</p>
+              <h1 className="text-2xl font-bold text-primary">{t('roles.asha')} {t('dashboard.overview')}</h1>
+              <p className="text-muted-foreground">{t('dashboard.welcome')}, {profile?.name}</p>
             </div>
           </div>
-          <Button onClick={signOut} variant="outline">
-            <LogOut className="h-4 w-4 mr-2" />
-            Sign Out
-          </Button>
+          <div className="flex items-center gap-4">
+            <LanguageToggle />
+            <Button onClick={signOut} variant="outline">
+              <LogOut className="h-4 w-4 mr-2" />
+              {t('dashboard.logout')}
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

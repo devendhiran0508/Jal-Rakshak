@@ -1,0 +1,99 @@
+{
+  "appName": "Jal Rakshak",
+  "appSubtitle": "Water & Health Guardian",
+  "appDescription": "A comprehensive platform for monitoring water quality and community health. Empowering ASHA workers, health officials, and communities to work together for better health outcomes.",
+  "getStarted": "Get Started",
+  "language": "Language",
+  "english": "English",
+  "hindi": "हिंदी",
+  
+  "auth": {
+    "login": "Sign In",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "village": "Village",
+    "role": "Role",
+    "selectRole": "Select your role",
+    "loginTitle": "Sign in to your account",
+    "signupTitle": "Create your account",
+    "loading": "Loading...",
+    "alreadyHaveAccount": "Already have an account? Sign in",
+    "dontHaveAccount": "Don't have an account? Sign up",
+    "signupSuccess": "Account created successfully! Please check your email to verify your account.",
+    "fillAllFields": "Please fill in all fields",
+    "loginError": "Login Error",
+    "signupError": "Signup Error",
+    "unexpectedError": "An unexpected error occurred"
+  },
+
+  "roles": {
+    "asha": "ASHA Worker",
+    "official": "Health Official", 
+    "community": "Community Member",
+    "villager": "Villager",
+    "ashaDescription": "Submit health reports and monitor community health",
+    "officialDescription": "Monitor reports, analyze data, and send alerts",
+    "communityDescription": "Access health education and receive alerts",
+    "villagerDescription": "Monitor water quality and receive health alerts"
+  },
+
+  "dashboard": {
+    "welcome": "Welcome",
+    "overview": "Overview",
+    "reports": "Reports",
+    "alerts": "Alerts",
+    "education": "Health Education",
+    "waterQuality": "Water Quality",
+    "feedback": "Feedback",
+    "logout": "Logout",
+    "submitReport": "Submit Report",
+    "viewReports": "View Reports",
+    "sendAlert": "Send Alert",
+    "manageAlerts": "Manage Alerts"
+  },
+
+  "features": {
+    "healthMonitoring": "Health Monitoring",
+    "healthMonitoringDesc": "Real-time health report submission and monitoring system for community health workers",
+    "waterQuality": "Water Quality",
+    "waterQualityDesc": "Live sensor data monitoring pH levels and turbidity for safe drinking water",
+    "alertSystem": "Alert System",
+    "alertSystemDesc": "Instant alerts and health education content delivery to communities"
+  },
+
+  "waterMetrics": {
+    "ph": "pH Level",
+    "turbidity": "Turbidity",
+    "temperature": "Temperature",
+    "excellent": "Excellent",
+    "good": "Good", 
+    "fair": "Fair",
+    "poor": "Poor",
+    "status": "Status"
+  },
+
+  "forms": {
+    "patientName": "Patient Name",
+    "age": "Age",
+    "symptoms": "Symptoms",
+    "location": "Location",
+    "severity": "Severity",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "submit": "Submit",
+    "message": "Message",
+    "title": "Title",
+    "description": "Description",
+    "send": "Send"
+  },
+
+  "stats": {
+    "totalReports": "Total Reports",
+    "activeAlerts": "Active Alerts",
+    "waterSources": "Water Sources",
+    "education": "Education Content"
+  }
+}
