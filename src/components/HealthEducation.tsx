@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb } from 'lucide-react';
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Droplets, HandHeart, Heart, Shield } from 'lucide-react';
 
 interface EducationContent {
   id: string;
@@ -14,6 +14,8 @@ interface EducationContent {
   priority: number;
   image_url?: string;
   created_at: string;
+  language: string;
+  target_role: string;
 }
 
 interface HealthEducationProps {
@@ -21,33 +23,80 @@ interface HealthEducationProps {
 }
 
 const HealthEducation: React.FC<HealthEducationProps> = ({ userRole }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [educationContent, setEducationContent] = useState<EducationContent[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetchEducationContent();
-  }, [userRole]);
+    
+    // Set up real-time subscription
+    const channel = supabase
+      .channel('education-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'education'
+        },
+        () => {
+          fetchEducationContent();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userRole, i18n.language]);
 
   const fetchEducationContent = async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    const currentLang = i18n.language;
+    
+    // Fetch content for current language
+    const { data: langData, error: langError } = await supabase
       .from('education')
       .select('*')
       .eq('is_active', true)
+      .eq('language', currentLang)
+      .in('target_role', [userRole, 'community'])
       .order('priority', { ascending: true })
       .order('created_at', { ascending: false });
 
-    if (error) {
-      toast({
-        title: t('messages.error'),
-        description: 'Failed to fetch education content',
-        variant: "destructive"
-      });
-    } else {
-      setEducationContent(data || []);
+    let content = langData || [];
+
+    // If no content in current language or error, fallback to English
+    if (!content.length || langError) {
+      const { data: fallbackData, error: fallbackError } = await supabase
+        .from('education')
+        .select('*')
+        .eq('is_active', true)
+        .eq('language', 'en')
+        .in('target_role', [userRole, 'community'])
+        .order('priority', { ascending: true })
+        .order('created_at', { ascending: false });
+
+      if (fallbackError) {
+        toast({
+          title: t('messages.error'),
+          description: 'Failed to fetch education content',
+          variant: "destructive"
+        });
+      } else {
+        content = fallbackData || [];
+        if (currentLang !== 'en' && content.length > 0) {
+          toast({
+            title: t('education.fallbackNotice'),
+            description: t('education.fallbackDescription')
+          });
+        }
+      }
     }
+
+    setEducationContent(content);
     setLoading(false);
   };
 
@@ -64,17 +113,17 @@ const HealthEducation: React.FC<HealthEducationProps> = ({ userRole }) => {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'water_safety':
-        return '💧';
+        return <Droplets className="h-6 w-6 text-blue-500" />;
       case 'hygiene':
-        return '🧼';
+        return <HandHeart className="h-6 w-6 text-green-500" />;
       case 'health_awareness':
-        return '🏥';
+        return <Heart className="h-6 w-6 text-red-500" />;
       case 'community_engagement':
-        return '👥';
+        return <Shield className="h-6 w-6 text-purple-500" />;
       case 'seasonal_health':
-        return '🌧️';
+        return <BookOpen className="h-6 w-6 text-orange-500" />;
       default:
-        return '📚';
+        return <BookOpen className="h-6 w-6 text-primary" />;
     }
   };
 
@@ -116,55 +165,57 @@ const HealthEducation: React.FC<HealthEducationProps> = ({ userRole }) => {
             <p className="text-muted-foreground">{t('education.noContent')}</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {educationContent.map((content) => {
               const isExpanded = expandedCards.has(content.id);
-              const shortContent = content.content.slice(0, 150);
-              const needsExpansion = content.content.length > 150;
+              const shortContent = content.content.slice(0, 120);
+              const needsExpansion = content.content.length > 120;
 
               return (
                 <div
                   key={content.id}
-                  className="border rounded-lg p-4 bg-gradient-to-r from-blue-50 to-green-50 hover:shadow-md transition-shadow"
+                  className="group border rounded-lg overflow-hidden bg-gradient-to-br from-background to-muted/20 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-2xl">{getCategoryIcon(content.category)}</span>
-                      <div>
-                        <h4 className="font-semibold text-primary">{content.title}</h4>
-                        <span className="text-xs text-muted-foreground bg-white/60 px-2 py-1 rounded-full">
-                          {t(`education.categories.${content.category}`)}
+                  <div className="p-6">
+                    <div className="flex items-center space-x-3 mb-4">
+                      {getCategoryIcon(content.category)}
+                      <div className="flex-1">
+                        <span className="inline-block text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full mb-2">
+                          {t(`education.categories.${content.category}`, content.category)}
                         </span>
+                        <h4 className="font-bold text-foreground group-hover:text-primary transition-colors">
+                          {content.title}
+                        </h4>
                       </div>
                     </div>
-                  </div>
-                  
-                  <div className="text-sm text-muted-foreground leading-relaxed">
-                    <p>
-                      {isExpanded || !needsExpansion ? content.content : `${shortContent}...`}
-                    </p>
-                  </div>
+                    
+                    <div className="text-sm text-muted-foreground leading-relaxed">
+                      <p className="mb-3">
+                        {isExpanded || !needsExpansion ? content.content : `${shortContent}...`}
+                      </p>
+                    </div>
 
-                  {needsExpansion && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => toggleExpanded(content.id)}
-                      className="mt-2 p-0 h-auto font-normal text-primary hover:text-primary/80"
-                    >
-                      {isExpanded ? (
-                        <>
-                          <ChevronUp className="h-4 w-4 mr-1" />
-                          {t('education.readLess')}
-                        </>
-                      ) : (
-                        <>
-                          <ChevronDown className="h-4 w-4 mr-1" />
-                          {t('education.readMore')}
-                        </>
-                      )}
-                    </Button>
-                  )}
+                    {needsExpansion && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => toggleExpanded(content.id)}
+                        className="mt-2 p-0 h-auto font-normal text-primary hover:text-primary/80 group-hover:bg-primary/10"
+                      >
+                        {isExpanded ? (
+                          <>
+                            <ChevronUp className="h-4 w-4 mr-1" />
+                            {t('education.readLess')}
+                          </>
+                        ) : (
+                          <>
+                            <ChevronDown className="h-4 w-4 mr-1" />
+                            {t('education.readMore')}
+                          </>
+                        )}
+                      </Button>
+                    )}
+                  </div>
                 </div>
               );
             })}

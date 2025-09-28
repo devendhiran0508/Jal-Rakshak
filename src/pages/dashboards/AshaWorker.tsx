@@ -5,6 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
@@ -47,6 +48,8 @@ const AshaWorker: React.FC = () => {
   const [smsDialogOpen, setSmsDialogOpen] = useState(false);
   const [smsContent, setSmsContent] = useState('');
   const [smsLoading, setSmsLoading] = useState(false);
+  const [smsInputText, setSmsInputText] = useState('');
+  const [smsParseLoading, setSmsParseLoading] = useState(false);
   const { syncOfflineReports } = useOfflineSync();
   const [formData, setFormData] = useState({
     patient_name: '',
@@ -175,6 +178,95 @@ const AshaWorker: React.FC = () => {
     setLoading(false);
   };
 
+  const parseSMSInput = (text: string) => {
+    // Parse SMS format: REPORT <Name> <Village> <Symptom> <WaterSource>
+    const trimmedText = text.trim();
+    const parts = trimmedText.split(' ');
+    
+    if (parts.length < 5 || parts[0].toUpperCase() !== 'REPORT') {
+      return null;
+    }
+    
+    // Extract parts (handle spaces in names by joining appropriately)
+    const [, ...restParts] = parts;
+    
+    // Find indices for village, symptom, and water source
+    // For simplicity, assume format: REPORT Name Village Symptom WaterSource
+    if (restParts.length < 4) {
+      return null;
+    }
+    
+    return {
+      patient_name: restParts[0],
+      village: restParts[1], 
+      symptoms: restParts[2],
+      water_source: restParts[3]
+    };
+  };
+
+  const handleSMSFallbackSubmit = async () => {
+    if (!profile?.user_id) return;
+    
+    setSmsParseLoading(true);
+    
+    try {
+      const parsedData = parseSMSInput(smsInputText);
+      
+      if (!parsedData) {
+        toast({
+          title: t('messages.error'),
+          description: "Invalid SMS format. Please use REPORT <Name> <Village> <Symptom> <WaterSource>",
+          variant: "destructive"
+        });
+        setSmsParseLoading(false);
+        return;
+      }
+      
+      // Save to Supabase reports table
+      const { error } = await supabase
+        .from('reports')
+        .insert([
+          {
+            asha_id: profile.user_id,
+            patient_name: parsedData.patient_name,
+            village: parsedData.village,
+            symptoms: parsedData.symptoms,
+            water_source: parsedData.water_source,
+            submitted_via: 'SMS'
+          }
+        ]);
+
+      if (error) {
+        toast({
+          title: t('messages.error'),
+          description: t('asha.errorSubmitReport'),
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: t('messages.success'),
+          description: "SMS Report Submitted"
+        });
+        
+        setSmsInputText('');
+        
+        // Run outbreak detection after successful SMS report submission
+        await runOutbreakDetection({
+          village: parsedData.village,
+          symptoms: parsedData.symptoms
+        });
+      }
+    } catch (error) {
+      toast({
+        title: t('messages.error'),
+        description: t('asha.errorSubmitReport'),
+        variant: "destructive"
+      });
+    }
+    
+    setSmsParseLoading(false);
+  };
+
   const generateSMSContent = () => {
     const currentTime = new Date().toLocaleString();
     return `[HEALTH REPORT - OFFLINE]
@@ -202,7 +294,7 @@ Time: ${currentTime}
     setSmsDialogOpen(true);
   };
 
-  const handleSMSSubmit = () => {
+  const handleSMSOfflineSubmit = () => {
     if (!profile?.user_id) return;
 
     setSmsLoading(true);
@@ -301,6 +393,42 @@ Time: ${currentTime}
           </div>
         </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          {/* SMS Fallback Reporting */}
+          <Card className="lg:col-span-2">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <MessageSquare className="h-5 w-5 mr-2" />
+                SMS Fallback Reporting
+              </CardTitle>
+              <CardDescription>
+                Submit reports via SMS format when offline: REPORT &lt;Name&gt; &lt;Village&gt; &lt;Symptom&gt; &lt;WaterSource&gt;
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="sms-input">SMS Format Input</Label>
+                  <Textarea
+                    id="sms-input"
+                    placeholder="Example: REPORT Rina Bora VillageA Diarrhea Handpump"
+                    value={smsInputText}
+                    onChange={(e) => setSmsInputText(e.target.value)}
+                    className="min-h-[100px]"
+                  />
+                </div>
+                <Button 
+                  onClick={handleSMSFallbackSubmit} 
+                  disabled={smsParseLoading || !smsInputText.trim()}
+                  className="w-full"
+                >
+                  {smsParseLoading ? 'Processing SMS...' : 'Submit SMS'}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Report Form */}
           <Card>
@@ -379,7 +507,7 @@ Time: ${currentTime}
                     disabled={loading}
                     className="w-full flex items-center gap-2"
                   >
-                    <MessageSquare className="h-4 w-4" />
+                    <WifiOff className="h-4 w-4" />
                     {t('offline.smsMode')}
                   </Button>
                 </div>
@@ -470,7 +598,7 @@ Time: ${currentTime}
           open={smsDialogOpen}
           onOpenChange={setSmsDialogOpen}
           smsContent={smsContent}
-          onConfirm={handleSMSSubmit}
+          onConfirm={handleSMSOfflineSubmit}
           loading={smsLoading}
         />
       </div>

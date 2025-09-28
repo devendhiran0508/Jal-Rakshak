@@ -140,7 +140,11 @@
     "errorSubmitReport": "रिपोर्ट जमा करने में विफल",
     "reportSubmitted": "स्वास्थ्य रिपोर्ट सफलतापूर्वक जमा की गई",
     "symptomsLabel": "लक्षण:",
-    "waterSourceLabel": "पानी का स्रोत:"
+    "waterSourceLabel": "पानी का स्रोत:",
+    "alerts": "अलर्ट",
+    "importantAlerts": "महत्वपूर्ण स्वास्थ्य अलर्ट और भविष्यवाणी",
+    "noAlertsYet": "इस समय कोई अलर्ट नहीं",
+    "aiPredicted": "AI भविष्यवाणी"
   },
 
   "official": {
@@ -191,7 +195,8 @@
     "recognizingSymptoms": "लक्षणों को पहचानना",
     "recognizingSymptomsDesc": "निर्जलीकरण, दस्त, बुखार और पेट दर्द के संकेतों पर ध्यान दें। गंभीर लक्षणों के लिए तुरंत चिकित्सा सहायता लें।",
     "communityHygiene": "सामुदायिक स्वच्छता",
-    "communityHygieneDesc": "स्वच्छ परिवेश बनाए रखें, उचित अपशिष्ट निपटान करें, और रोग फैलने से रोकने के लिए पानी भंडारण क्षेत्रों की नियमित सफाई करें।"
+    "communityHygieneDesc": "स्वच्छ परिवेश बनाए रखें, उचित अपशिष्ट निपटान करें, और रोग फैलने से रोकने के लिए पानी भंडारण क्षेत्रों की नियमित सफाई करें।",
+    "aiPredicted": "AI भविष्यवाणी"
   },
 
   "villager": {
@@ -215,7 +220,10 @@
     "noAlertsTime": "इस समय कोई अलर्ट नहीं",
     "staySafeHealthy": "सुरक्षित और स्वस्थ रहें!",
     "from": "से",
-    "aiPredicted": "एआई भविष्यवाणी"
+    "aiPredicted": "एआई भविष्यवाणी",
+    "overview": "अवलोकन",
+    "healthEducation": "स्वास्थ्य शिक्षा",
+    "feedbackAndSupport": "फीडबैक और सहायता"
   },
 
   "symptoms": {
@@ -253,7 +261,9 @@
     },
     "noContent": "इस समय कोई शैक्षिक सामग्री उपलब्ध नहीं है।",
     "readMore": "और पढ़ें",
-    "readLess": "कम पढ़ें"
+    "readLess": "कम पढ़ें",
+    "fallbackNotice": "भाषा सामग्री अनुपलब्ध",
+    "fallbackDescription": "वैकल्पिक के रूप में अंग्रेजी में सामग्री दिखाई जा रही है"
   },
 
   "feedback": {
@@ -276,6 +286,17 @@
     "yourFeedback": "आपकी पिछली प्रतिक्रिया",
     "allFeedback": "सामुदायिक प्रतिक्रिया",
     "response": "आधिकारिक प्रतिवाद"
+  },
+
+  "map": {
+    "diseaseHotspots": "रोग हॉटस्पॉट",
+    "last7Days": "पिछले 7 दिन",
+    "cases": "मामले",
+    "commonSymptom": "सबसे आम लक्षण",
+    "riskLevel": "जोखिम स्तर",
+    "lowRisk": "कम जोखिम",
+    "mediumRisk": "मध्यम जोखिम",
+    "highRisk": "उच्च जोखिम"
   },
 
   "messages": {

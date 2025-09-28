@@ -14,6 +14,7 @@ import { Shield, AlertTriangle, BarChart3, Users, LogOut, Plus, Brain } from 'lu
 import { UserRole } from '@/contexts/AuthContext';
 import LanguageToggle from '@/components/LanguageToggle';
 import FeedbackManagement from '@/components/FeedbackManagement';
+import DiseaseHotspotsMap from '@/components/DiseaseHotspotsMap';
 
 interface Report {
   id: string;
@@ -24,6 +25,15 @@ interface Report {
   created_at: string;
   submitted_via?: string;
   asha_id?: string;
+}
+
+interface CommunityReport {
+  id: string;
+  issue_type: string;
+  description?: string;
+  village: string;
+  submitted_by: string;
+  created_at: string;
 }
 
 interface Alert {
@@ -44,6 +54,7 @@ const HealthOfficial: React.FC = () => {
   const [reports, setReports] = useState<Report[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [predictedOutbreaks, setPredictedOutbreaks] = useState<Alert[]>([]);
+  const [communityReports, setCommunityReports] = useState<CommunityReport[]>([]);
   const [loading, setLoading] = useState(false);
   const [alertForm, setAlertForm] = useState({
     message: '',
@@ -54,6 +65,7 @@ const HealthOfficial: React.FC = () => {
     fetchReports();
     fetchAlerts();
     fetchPredictedOutbreaks();
+    fetchCommunityReports();
     
     // Set up real-time subscriptions
     const reportsChannel = supabase
@@ -90,9 +102,25 @@ const HealthOfficial: React.FC = () => {
       )
       .subscribe();
 
+    const communityReportsChannel = supabase
+      .channel('community-reports')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'community_reports'
+        },
+        (payload) => {
+          setCommunityReports(current => [payload.new as CommunityReport, ...current]);
+        }
+      )
+      .subscribe();
+
     return () => {
       supabase.removeChannel(reportsChannel);
       supabase.removeChannel(alertsChannel);
+      supabase.removeChannel(communityReportsChannel);
     };
   }, []);
 
@@ -145,6 +173,23 @@ const HealthOfficial: React.FC = () => {
       });
     } else {
       setPredictedOutbreaks(data || []);
+    }
+  };
+
+  const fetchCommunityReports = async () => {
+    const { data, error } = await supabase
+      .from('community_reports')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      toast({
+        title: t('messages.error'),
+        description: "Failed to fetch community reports",
+        variant: "destructive"
+      });
+    } else {
+      setCommunityReports(data || []);
     }
   };
 
@@ -311,6 +356,11 @@ const HealthOfficial: React.FC = () => {
             </CardContent>
           </Card>
         )}
+
+        {/* Disease Hotspots Map */}
+        <div className="mb-6">
+          <DiseaseHotspotsMap />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Charts */}
@@ -479,6 +529,54 @@ const HealthOfficial: React.FC = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Community Reports */}
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Users className="h-5 w-5 mr-2" />
+              {t('official.communityReports')} ({communityReports.length})
+            </CardTitle>
+            <CardDescription>{t('official.issuesReportedByVillagers')}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="max-h-96 overflow-y-auto">
+              {communityReports.length === 0 ? (
+                <div className="text-center py-8">
+                  <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">{t('official.noCommunityReports')}</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {communityReports.slice(0, 20).map((report) => (
+                    <div key={report.id} className="border rounded-lg p-4 bg-card">
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-sm font-medium capitalize">
+                              {report.issue_type.replace('_', ' ')}
+                            </span>
+                            <span className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded">
+                              {report.village}
+                            </span>
+                          </div>
+                          {report.description && (
+                            <p className="text-sm text-muted-foreground">{report.description}</p>
+                          )}
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-muted-foreground">
+                            {new Date(report.created_at).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Feedback Management */}
         <div className="mt-6">

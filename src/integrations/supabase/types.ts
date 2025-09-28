@@ -64,6 +64,36 @@ export type Database = {
           },
         ]
       }
+      community_reports: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          issue_type: string
+          submitted_by: string
+          updated_at: string
+          village: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          issue_type: string
+          submitted_by: string
+          updated_at?: string
+          village: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          issue_type?: string
+          submitted_by?: string
+          updated_at?: string
+          village?: string
+        }
+        Relationships: []
+      }
       education: {
         Row: {
           category: string
@@ -72,6 +102,7 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean | null
+          language: string
           priority: number | null
           target_role: Database["public"]["Enums"]["user_role"]
           title: string
@@ -84,6 +115,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          language?: string
           priority?: number | null
           target_role: Database["public"]["Enums"]["user_role"]
           title: string
@@ -96,6 +128,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean | null
+          language?: string
           priority?: number | null
           target_role?: Database["public"]["Enums"]["user_role"]
           title?: string

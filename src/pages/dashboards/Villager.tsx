@@ -4,13 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
-import { Home, AlertTriangle, Droplets, Activity, LogOut, Thermometer, TestTube } from 'lucide-react';
+import { Home, AlertTriangle, Droplets, Activity, LogOut, Thermometer, TestTube, BookOpen, MessageCircle } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import HealthEducation from '@/components/HealthEducation';
 import FeedbackForm from '@/components/FeedbackForm';
 import VillagerSymptomReport from '@/components/VillagerSymptomReport';
+import VillagerIssueReport from '@/components/VillagerIssueReport';
 import { useOfflineSync } from '@/hooks/useOfflineSync';
 
 interface Alert {
@@ -269,15 +271,42 @@ const Villager: React.FC = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-          {/* Villager Symptom Report */}
-          <VillagerSymptomReport />
+        {/* Main Content Tabs */}
+        <Tabs defaultValue="overview" className="mt-6">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="overview" className="flex items-center gap-2">
+              <Activity className="h-4 w-4" />
+              {t('villager.overview')}
+            </TabsTrigger>
+            <TabsTrigger value="education" className="flex items-center gap-2">
+              <BookOpen className="h-4 w-4" />
+              {t('villager.healthEducation')}
+            </TabsTrigger>
+          </TabsList>
           
-          {/* Health Education */}
-          <HealthEducation userRole="villager" />
+          <TabsContent value="overview" className="space-y-6">
+            <VillagerSymptomReport />
+            <VillagerIssueReport />
+          </TabsContent>
           
-          {/* Feedback Form */}
-          <FeedbackForm />
+          <TabsContent value="education" className="space-y-6">
+            <HealthEducation userRole="villager" />
+          </TabsContent>
+        </Tabs>
+
+        {/* Feedback Form - Always at bottom */}
+        <div className="mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <MessageCircle className="h-5 w-5 mr-2" />
+                {t('villager.feedbackAndSupport')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <FeedbackForm />
+            </CardContent>
+          </Card>
         </div>
 
         {/* Water Quality Guidelines */}

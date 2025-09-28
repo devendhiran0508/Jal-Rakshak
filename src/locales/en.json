@@ -140,7 +140,11 @@
     "errorSubmitReport": "Failed to submit report",
     "reportSubmitted": "Health report submitted successfully",
     "symptomsLabel": "Symptoms:",
-    "waterSourceLabel": "Water Source:"
+    "waterSourceLabel": "Water Source:",
+    "alerts": "Alerts",
+    "importantAlerts": "Important health alerts and predictions",
+    "noAlertsYet": "No alerts at this time",
+    "aiPredicted": "AI Predicted"
   },
 
   "official": {
@@ -166,7 +170,10 @@
     "waterQuality": "Water Quality",
     "seasonal": "Seasonal",
     "parameter": "Parameter",
-    "aiGenerated": "AI Generated"
+    "aiGenerated": "AI Generated",
+    "communityReports": "Community Reports",
+    "issuesReportedByVillagers": "Issues and concerns reported by villagers",
+    "noCommunityReports": "No community reports yet"
   },
 
   "community": {
@@ -191,7 +198,8 @@
     "recognizingSymptoms": "Recognizing Symptoms",
     "recognizingSymptomsDesc": "Watch for signs of dehydration, diarrhea, fever, and stomach pain. Seek immediate medical attention for severe symptoms.",
     "communityHygiene": "Community Hygiene",
-    "communityHygieneDesc": "Maintain clean surroundings, proper waste disposal, and regular cleaning of water storage areas to prevent disease spread."
+    "communityHygieneDesc": "Maintain clean surroundings, proper waste disposal, and regular cleaning of water storage areas to prevent disease spread.",
+    "aiPredicted": "AI Predicted"
   },
 
   "villager": {
@@ -215,7 +223,25 @@
     "noAlertsTime": "No alerts at this time",
     "staySafeHealthy": "Stay safe and healthy!",
     "from": "from",
-    "aiPredicted": "AI Predicted"
+    "aiPredicted": "AI Predicted",
+    "overview": "Overview",
+    "healthEducation": "Health Education",
+    "feedbackAndSupport": "Feedback & Support",
+    "reportAnIssue": "Report an Issue",
+    "reportCommunityIssues": "Report community issues or concerns to local health officials",
+    "issueType": "Issue Type",
+    "selectIssueType": "Select issue type",
+    "dirtyWater": "Dirty Water",
+    "manyPeopleSick": "Many People Sick",
+    "handPumpBroken": "Hand Pump Broken",
+    "describeIssue": "Describe the issue in detail",
+    "submitIssue": "Submit Issue",
+    "myReports": "My Reports",
+    "yourSubmittedIssues": "Your submitted issues and reports",
+    "noReportsYet": "No reports submitted yet",
+    "reportIssuesAbove": "Use the form above to report issues",
+    "issueReported": "Issue reported successfully",
+    "issueSavedOffline": "Issue saved offline and will be submitted when connection is restored"
   },
 
   "symptoms": {
@@ -253,7 +279,9 @@
     },
     "noContent": "No educational content available at this time.",
     "readMore": "Read More",
-    "readLess": "Read Less"
+    "readLess": "Read Less",
+    "fallbackNotice": "Language content unavailable",
+    "fallbackDescription": "Showing content in English as fallback"
   },
 
   "feedback": {
@@ -276,6 +304,22 @@
     "yourFeedback": "Your Previous Feedback",
     "allFeedback": "Community Feedback",
     "response": "Official Response"
+  },
+
+  "map": {
+    "diseaseHotspots": "Disease Hotspots",
+    "last7Days": "Last 7 Days",
+    "cases": "Cases",
+    "commonSymptom": "Most Common Symptom",
+    "riskLevel": "Risk Level",
+    "lowRisk": "Low Risk",
+    "mediumRisk": "Medium Risk",
+    "highRisk": "High Risk"
+  },
+
+  "common": {
+    "cancel": "Cancel",
+    "loading": "Loading..."
   },
 
   "messages": {
