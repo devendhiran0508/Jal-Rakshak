@@ -7,6 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toast } from '@/hooks/use-toast';
 import { Home, AlertTriangle, Droplets, Activity, LogOut, Thermometer, TestTube } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
+import HealthEducation from '@/components/HealthEducation';
+import FeedbackForm from '@/components/FeedbackForm';
 
 interface Alert {
   id: string;
@@ -255,6 +257,14 @@ const Villager: React.FC = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          {/* Health Education */}
+          <HealthEducation userRole="villager" />
+          
+          {/* Feedback Form */}
+          <FeedbackForm />
         </div>
 
         {/* Water Quality Guidelines */}

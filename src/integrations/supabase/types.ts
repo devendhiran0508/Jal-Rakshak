@@ -64,6 +64,78 @@ export type Database = {
           },
         ]
       }
+      education: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          priority: number | null
+          target_role: Database["public"]["Enums"]["user_role"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          content: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          priority?: number | null
+          target_role: Database["public"]["Enums"]["user_role"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          priority?: number | null
+          target_role?: Database["public"]["Enums"]["user_role"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      feedback: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          response: string | null
+          status: string | null
+          submitted_by: string
+          updated_at: string
+          village: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          response?: string | null
+          status?: string | null
+          submitted_by: string
+          updated_at?: string
+          village: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          response?: string | null
+          status?: string | null
+          submitted_by?: string
+          updated_at?: string
+          village?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string

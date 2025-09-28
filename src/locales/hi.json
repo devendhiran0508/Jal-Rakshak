@@ -130,7 +130,14 @@
     "recentAlerts": "हाल के अलर्ट",
     "affectedVillages": "प्रभावित गांव",
     "patient": "मरीज़",
-    "date": "तारीख"
+    "date": "तारीख",
+    "predictedOutbreaks": "एआई भविष्यवाणी प्रकोप",
+    "aiDetectedAlerts": "एआई-पहचाने गए संभावित रोग प्रकोप",
+    "diseaseCluster": "रोग क्लस्टर",
+    "waterQuality": "पानी की गुणवत्ता",
+    "seasonal": "मौसमी",
+    "parameter": "पैरामीटर",
+    "aiGenerated": "एआई जनरेटेड"
   },
 
   "community": {
@@ -178,7 +185,8 @@
     "veryCloudy": "बहुत धुंधला",
     "noAlertsTime": "इस समय कोई अलर्ट नहीं",
     "staySafeHealthy": "सुरक्षित और स्वस्थ रहें!",
-    "from": "से"
+    "from": "से",
+    "aiPredicted": "एआई भविष्यवाणी"
   },
 
   "symptoms": {
@@ -202,6 +210,43 @@
     "pond": "तालाब",
     "tankWater": "टैंक का पानी",
     "bottledWater": "बोतल का पानी"
+  },
+
+  "education": {
+    "title": "स्वास्थ्य शिक्षा",
+    "subtitle": "महत्वपूर्ण स्वास्थ्य और सुरक्षा जानकारी",
+    "categories": {
+      "water_safety": "जल सुरक्षा",
+      "hygiene": "स्वच्छता",
+      "health_awareness": "स्वास्थ्य जागरूकता",
+      "community_engagement": "सामुदायिक सहभागिता",
+      "seasonal_health": "मौसमी स्वास्थ्य"
+    },
+    "noContent": "इस समय कोई शैक्षिक सामग्री उपलब्ध नहीं है।",
+    "readMore": "और पढ़ें",
+    "readLess": "कम पढ़ें"
+  },
+
+  "feedback": {
+    "title": "प्रतिक्रिया और शिकायतें",
+    "subtitle": "अपनी चिंताएं और सुझाव साझा करें",
+    "form": {
+      "message": "आपका संदेश",
+      "messagePlaceholder": "अपनी चिंता, शिकायत या सुझाव का वर्णन करें...",
+      "submit": "प्रतिक्रिया भेजें",
+      "submitting": "भेजा जा रहा है..."
+    },
+    "status": {
+      "pending": "लंबित",
+      "reviewed": "समीक्षित",
+      "resolved": "हल किया गया"
+    },
+    "success": "प्रतिक्रिया सफलतापूर्वक भेजी गई!",
+    "error": "प्रतिक्रिया भेजने में विफल। कृपया पुनः प्रयास करें।",
+    "noFeedback": "अभी तक कोई प्रतिक्रिया नहीं भेजी गई।",
+    "yourFeedback": "आपकी पिछली प्रतिक्रिया",
+    "allFeedback": "सामुदायिक प्रतिक्रिया",
+    "response": "आधिकारिक प्रतिवाद"
   },
 
   "messages": {

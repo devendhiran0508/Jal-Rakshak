@@ -130,7 +130,14 @@
     "recentAlerts": "Recent Alerts",
     "affectedVillages": "Affected Villages",
     "patient": "Patient",
-    "date": "Date"
+    "date": "Date",
+    "predictedOutbreaks": "AI Predicted Outbreaks",
+    "aiDetectedAlerts": "AI-detected potential disease outbreaks",
+    "diseaseCluster": "Disease Cluster",
+    "waterQuality": "Water Quality",
+    "seasonal": "Seasonal",
+    "parameter": "Parameter",
+    "aiGenerated": "AI Generated"
   },
 
   "community": {
@@ -178,7 +185,8 @@
     "veryCloudy": "Very cloudy",
     "noAlertsTime": "No alerts at this time",
     "staySafeHealthy": "Stay safe and healthy!",
-    "from": "from"
+    "from": "from",
+    "aiPredicted": "AI Predicted"
   },
 
   "symptoms": {
@@ -202,6 +210,43 @@
     "pond": "Pond",
     "tankWater": "Tank Water",
     "bottledWater": "Bottled Water"
+  },
+
+  "education": {
+    "title": "Health Education",
+    "subtitle": "Important health and safety information",
+    "categories": {
+      "water_safety": "Water Safety",
+      "hygiene": "Hygiene",
+      "health_awareness": "Health Awareness",
+      "community_engagement": "Community Engagement",
+      "seasonal_health": "Seasonal Health"
+    },
+    "noContent": "No educational content available at this time.",
+    "readMore": "Read More",
+    "readLess": "Read Less"
+  },
+
+  "feedback": {
+    "title": "Feedback & Complaints",
+    "subtitle": "Share your concerns and suggestions",
+    "form": {
+      "message": "Your Message",
+      "messagePlaceholder": "Describe your concern, complaint, or suggestion...",
+      "submit": "Submit Feedback",
+      "submitting": "Submitting..."
+    },
+    "status": {
+      "pending": "Pending",
+      "reviewed": "Reviewed",
+      "resolved": "Resolved"
+    },
+    "success": "Feedback submitted successfully!",
+    "error": "Failed to submit feedback. Please try again.",
+    "noFeedback": "No feedback submitted yet.",
+    "yourFeedback": "Your Previous Feedback",
+    "allFeedback": "Community Feedback",
+    "response": "Official Response"
   },
 
   "messages": {

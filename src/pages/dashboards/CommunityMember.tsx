@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toast } from '@/hooks/use-toast';
 import { Users, AlertTriangle, BookOpen, LogOut, Droplets, Heart } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
+import HealthEducation from '@/components/HealthEducation';
 
 interface Alert {
   id: string;
@@ -189,6 +190,11 @@ const CommunityMember: React.FC = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Health Education Section */}
+        <div className="mt-6">
+          <HealthEducation userRole="community" />
         </div>
 
         {/* Quick Tips */}

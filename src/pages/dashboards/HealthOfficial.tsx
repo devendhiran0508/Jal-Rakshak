@@ -13,6 +13,7 @@ import { toast } from '@/hooks/use-toast';
 import { Shield, AlertTriangle, BarChart3, Users, LogOut, Plus, Brain } from 'lucide-react';
 import { UserRole } from '@/contexts/AuthContext';
 import LanguageToggle from '@/components/LanguageToggle';
+import FeedbackManagement from '@/components/FeedbackManagement';
 
 interface Report {
   id: string;
@@ -456,6 +457,11 @@ const HealthOfficial: React.FC = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Feedback Management */}
+        <div className="mt-6">
+          <FeedbackManagement />
         </div>
       </div>
     </div>
