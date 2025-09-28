@@ -175,6 +175,7 @@ export type Database = {
           created_at: string
           id: string
           patient_name: string
+          submitted_via: string
           symptoms: string
           updated_at: string
           village: string
@@ -185,6 +186,7 @@ export type Database = {
           created_at?: string
           id?: string
           patient_name: string
+          submitted_via?: string
           symptoms: string
           updated_at?: string
           village: string
@@ -195,6 +197,7 @@ export type Database = {
           created_at?: string
           id?: string
           patient_name?: string
+          submitted_via?: string
           symptoms?: string
           updated_at?: string
           village?: string

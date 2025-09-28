@@ -8,10 +8,14 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
-import { Heart, Plus, FileText, LogOut, AlertTriangle } from 'lucide-react';
+import { Heart, Plus, FileText, LogOut, AlertTriangle, MessageSquare, WifiOff } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
+import OfflineIndicator from '@/components/OfflineIndicator';
+import SMSPreviewDialog from '@/components/SMSPreviewDialog';
 import { runOutbreakDetection } from '@/utils/outbreakDetection';
 import { UserRole } from '@/contexts/AuthContext';
+import { saveOfflineReport, isOnline } from '@/utils/offlineStorage';
+import { useOfflineSync } from '@/hooks/useOfflineSync';
 
 interface Report {
   id: string;
@@ -40,6 +44,10 @@ const AshaWorker: React.FC = () => {
   const [reports, setReports] = useState<Report[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(false);
+  const [smsDialogOpen, setSmsDialogOpen] = useState(false);
+  const [smsContent, setSmsContent] = useState('');
+  const [smsLoading, setSmsLoading] = useState(false);
+  const { syncOfflineReports } = useOfflineSync();
   const [formData, setFormData] = useState({
     patient_name: '',
     village: profile?.village || '',
@@ -118,44 +126,114 @@ const AshaWorker: React.FC = () => {
 
     setLoading(true);
 
-    const { error } = await supabase
-      .from('reports')
-      .insert([
-        {
-          asha_id: profile.user_id,
-          patient_name: formData.patient_name,
-          village: formData.village,
-          symptoms: formData.symptoms,
-          water_source: formData.water_source
-        }
-      ]);
+    try {
+      const { error } = await supabase
+        .from('reports')
+        .insert([
+          {
+            asha_id: profile.user_id,
+            patient_name: formData.patient_name,
+            village: formData.village,
+            symptoms: formData.symptoms,
+            water_source: formData.water_source,
+            submitted_via: 'online'
+          }
+        ]);
 
-    if (error) {
+      if (error) {
+        toast({
+          title: t('messages.error'),
+          description: t('asha.errorSubmitReport'),
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: t('messages.success'),
+          description: t('asha.reportSubmitted')
+        });
+        setFormData({
+          patient_name: '',
+          village: profile?.village || '',
+          symptoms: '',
+          water_source: ''
+        });
+        
+        // Run outbreak detection after successful report submission
+        await runOutbreakDetection({
+          village: formData.village,
+          symptoms: formData.symptoms
+        });
+      }
+    } catch (error) {
       toast({
         title: t('messages.error'),
         description: t('asha.errorSubmitReport'),
         variant: "destructive"
       });
-    } else {
-      toast({
-        title: t('messages.success'),
-        description: t('asha.reportSubmitted')
-      });
-      setFormData({
-        patient_name: '',
-        village: profile?.village || '',
-        symptoms: '',
-        water_source: ''
-      });
-      
-      // Run outbreak detection after successful report submission
-      await runOutbreakDetection({
-        village: formData.village,
-        symptoms: formData.symptoms
-      });
     }
 
     setLoading(false);
+  };
+
+  const generateSMSContent = () => {
+    const currentTime = new Date().toLocaleString();
+    return `[HEALTH REPORT - OFFLINE]
+Reporter: ${profile?.name} (${profile?.user_id})
+Village: ${formData.village}
+Patient: ${formData.patient_name}
+Symptoms: ${formData.symptoms}
+Water Source: ${formData.water_source}
+Time: ${currentTime}
+[Please process this SMS report]`;
+  };
+
+  const handleSMSMode = () => {
+    if (!formData.patient_name || !formData.symptoms) {
+      toast({
+        title: t('messages.error'),
+        description: "Please fill in patient name and symptoms",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    const content = generateSMSContent();
+    setSmsContent(content);
+    setSmsDialogOpen(true);
+  };
+
+  const handleSMSSubmit = () => {
+    if (!profile?.user_id) return;
+
+    setSmsLoading(true);
+    
+    const offlineReport = {
+      id: `sms_${Date.now()}_${Math.random()}`,
+      patient_name: formData.patient_name,
+      village: formData.village,
+      symptoms: formData.symptoms,
+      water_source: formData.water_source,
+      submitted_via: 'SMS' as const,
+      created_at: new Date().toISOString(),
+      asha_id: profile.user_id
+    };
+
+    saveOfflineReport(offlineReport);
+    
+    toast({
+      title: t('messages.success'),
+      description: t('offline.smsReportSaved')
+    });
+
+    setFormData({
+      patient_name: '',
+      village: profile?.village || '',
+      symptoms: '',
+      water_source: ''
+    });
+    
+    setSmsDialogOpen(false);
+    setSmsLoading(false);
   };
 
   const fetchAlerts = async () => {
@@ -214,6 +292,7 @@ const AshaWorker: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <OfflineIndicator />
             <LanguageToggle />
             <Button onClick={signOut} variant="outline">
               <LogOut className="h-4 w-4 mr-2" />
@@ -288,9 +367,22 @@ const AshaWorker: React.FC = () => {
                   </Select>
                 </div>
 
-                <Button type="submit" disabled={loading} className="w-full">
-                  {loading ? t('asha.submitting') : t('asha.submitReport')}
-                </Button>
+                <div className="space-y-2">
+                  <Button type="submit" disabled={loading} className="w-full">
+                    {loading ? t('asha.submitting') : t('asha.submitReport')}
+                  </Button>
+                  
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={handleSMSMode}
+                    disabled={loading}
+                    className="w-full flex items-center gap-2"
+                  >
+                    <MessageSquare className="h-4 w-4" />
+                    {t('offline.smsMode')}
+                  </Button>
+                </div>
               </form>
             </CardContent>
           </Card>
@@ -372,6 +464,15 @@ const AshaWorker: React.FC = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* SMS Preview Dialog */}
+        <SMSPreviewDialog
+          open={smsDialogOpen}
+          onOpenChange={setSmsDialogOpen}
+          smsContent={smsContent}
+          onConfirm={handleSMSSubmit}
+          loading={smsLoading}
+        />
       </div>
     </div>
   );

@@ -22,6 +22,8 @@ interface Report {
   symptoms: string;
   water_source: string;
   created_at: string;
+  submitted_via?: string;
+  asha_id?: string;
 }
 
 interface Alert {
@@ -377,14 +379,33 @@ const HealthOfficial: React.FC = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {reports.slice(0, 10).map((report) => (
-                      <TableRow key={report.id}>
-                        <TableCell className="font-medium">{report.patient_name}</TableCell>
-                        <TableCell>{report.village}</TableCell>
-                        <TableCell className="text-destructive">{report.symptoms}</TableCell>
-                        <TableCell>{new Date(report.created_at).toLocaleDateString()}</TableCell>
-                      </TableRow>
-                    ))}
+                    {reports.slice(0, 10).map((report) => {
+                      const isVillagerReport = report.submitted_via?.includes('villager');
+                      const isSMSReport = report.submitted_via?.includes('SMS');
+                      
+                      return (
+                        <TableRow key={report.id}>
+                          <TableCell className="font-medium">
+                            <div className="flex items-center gap-2">
+                              {report.patient_name}
+                              {isVillagerReport && (
+                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                                  🧑‍🌾
+                                </span>
+                              )}
+                              {isSMSReport && (
+                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                  📩 SMS
+                                </span>
+                              )}
+                            </div>
+                          </TableCell>
+                          <TableCell>{report.village}</TableCell>
+                          <TableCell className="text-destructive">{report.symptoms}</TableCell>
+                          <TableCell>{new Date(report.created_at).toLocaleDateString()}</TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>

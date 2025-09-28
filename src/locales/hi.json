@@ -97,6 +97,35 @@
     "education": "शिक्षा सामग्री"
   },
 
+  "offline": {
+    "offline": "ऑफलाइन",
+    "online": "ऑनलाइन",
+    "pendingReports": "{{count}} लंबित",
+    "smsMode": "SMS भेजें (ऑफलाइन मोड)",
+    "smsPreview": "SMS पूर्वावलोकन",
+    "smsPreviewDescription": "इस संदेश को कॉपी करें और केस रिपोर्ट करने के लिए SMS भेजें",
+    "smsContentPlaceholder": "SMS सामग्री यहाँ दिखाई जाएगी...",
+    "smsInstructions": "ऊपर दिए गए संदेश को कॉपी करें और अपने निर्दिष्ट स्वास्थ्य अधिकारी के नंबर पर भेजें",
+    "smsCopied": "SMS सामग्री क्लिपबोर्ड में कॉपी हो गई",
+    "smsCopyFailed": "SMS सामग्री कॉपी करने में विफल",
+    "saveOffline": "ऑफलाइन सेव करें",
+    "savingOffline": "सेव हो रहा है...",
+    "syncSuccess": "{{count}} रिपोर्ट सफलतापूर्वक सिंक हुईं",
+    "syncPartial": "{{failed}} रिपोर्ट सिंक करने में विफल",
+    "syncFailed": "ऑफलाइन रिपोर्ट सिंक करने में विफल",
+    "offlineEducation": "ऑफलाइन स्वास्थ्य शिक्षा",
+    "villagerReport": "ग्रामीण रिपोर्ट", 
+    "basicSymptomReport": "बुनियादी लक्षण रिपोर्ट",
+    "offlineReportSaved": "रिपोर्ट ऑफलाइन सेव हो गई। कनेक्शन बहाली पर सिंक होगी।",
+    "smsReportSaved": "SMS रिपोर्ट सेव हो गई। स्वास्थ्य अधिकारियों के साथ संदेश साझा करें।",
+    "offlineMode": "ऑफलाइन मोड",
+    "onlineMode": "ऑनलाइन मोड"
+  },
+
+  "common": {
+    "cancel": "रद्द करें"
+  },
+
   "asha": {
     "submitHealthReport": "स्वास्थ्य रिपोर्ट जमा करें",
     "reportHealthCases": "अपने समुदाय में स्वास्थ्य मामलों की रिपोर्ट करें",

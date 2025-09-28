@@ -7,8 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toast } from '@/hooks/use-toast';
 import { Home, AlertTriangle, Droplets, Activity, LogOut, Thermometer, TestTube } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
+import OfflineIndicator from '@/components/OfflineIndicator';
 import HealthEducation from '@/components/HealthEducation';
 import FeedbackForm from '@/components/FeedbackForm';
+import VillagerSymptomReport from '@/components/VillagerSymptomReport';
+import { useOfflineSync } from '@/hooks/useOfflineSync';
 
 interface Alert {
   id: string;
@@ -35,10 +38,16 @@ const Villager: React.FC = () => {
   const { t } = useTranslation();
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [sensorReadings, setSensorReadings] = useState<SensorReading[]>([]);
+  const { refreshEducationContent } = useOfflineSync();
 
   useEffect(() => {
     fetchAlerts();
     fetchSensorReadings();
+    
+    // Cache education content for offline use
+    if (profile?.role) {
+      refreshEducationContent(profile.role);
+    }
     
     // Set up real-time subscriptions
     const alertsChannel = supabase
@@ -144,6 +153,7 @@ const Villager: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <OfflineIndicator />
             <LanguageToggle />
             <Button onClick={signOut} variant="outline">
               <LogOut className="h-4 w-4 mr-2" />
@@ -259,7 +269,10 @@ const Villager: React.FC = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+          {/* Villager Symptom Report */}
+          <VillagerSymptomReport />
+          
           {/* Health Education */}
           <HealthEducation userRole="villager" />
           

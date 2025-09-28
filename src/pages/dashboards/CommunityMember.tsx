@@ -7,7 +7,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toast } from '@/hooks/use-toast';
 import { Users, AlertTriangle, BookOpen, LogOut, Droplets, Heart } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
+import OfflineIndicator from '@/components/OfflineIndicator';
 import HealthEducation from '@/components/HealthEducation';
+import FeedbackForm from '@/components/FeedbackForm';
+import { useOfflineSync } from '@/hooks/useOfflineSync';
 
 interface Alert {
   id: string;
@@ -25,9 +28,15 @@ const CommunityMember: React.FC = () => {
   const { profile, signOut } = useAuth();
   const { t } = useTranslation();
   const [alerts, setAlerts] = useState<Alert[]>([]);
+  const { refreshEducationContent } = useOfflineSync();
 
   useEffect(() => {
     fetchAlerts();
+    
+    // Cache education content for offline use
+    if (profile?.role) {
+      refreshEducationContent(profile.role);
+    }
     
     // Set up real-time subscription for alerts
     const channel = supabase
@@ -107,6 +116,7 @@ const CommunityMember: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <OfflineIndicator />
             <LanguageToggle />
             <Button onClick={signOut} variant="outline">
               <LogOut className="h-4 w-4 mr-2" />

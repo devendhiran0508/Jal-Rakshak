@@ -97,6 +97,35 @@
     "education": "Education Content"
   },
 
+  "offline": {
+    "offline": "Offline",
+    "online": "Online", 
+    "pendingReports": "{{count}} pending",
+    "smsMode": "Send via SMS (Offline Mode)",
+    "smsPreview": "SMS Preview",
+    "smsPreviewDescription": "Copy this message and send it via SMS to report the case",
+    "smsContentPlaceholder": "SMS content will appear here...",
+    "smsInstructions": "Copy the message above and send it to your designated health official number",
+    "smsCopied": "SMS content copied to clipboard",
+    "smsCopyFailed": "Failed to copy SMS content",
+    "saveOffline": "Save Offline",
+    "savingOffline": "Saving...",
+    "syncSuccess": "{{count}} reports synced successfully",
+    "syncPartial": "{{failed}} reports failed to sync",
+    "syncFailed": "Failed to sync offline reports",
+    "offlineEducation": "Offline Health Education",
+    "villagerReport": "Villager Report",
+    "basicSymptomReport": "Basic Symptom Report",
+    "offlineReportSaved": "Report saved offline. Will sync when connection is restored.",
+    "smsReportSaved": "SMS report saved. Share the message with health officials.",
+    "offlineMode": "Offline Mode",
+    "onlineMode": "Online Mode"
+  },
+
+  "common": {
+    "cancel": "Cancel"
+  },
+
   "asha": {
     "submitHealthReport": "Submit Health Report",
     "reportHealthCases": "Report health cases in your community",
