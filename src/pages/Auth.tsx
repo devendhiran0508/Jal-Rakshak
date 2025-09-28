@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth, UserRole } from '@/contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,9 +9,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
 import { Droplets, Heart, Users, Home } from 'lucide-react';
+import LanguageToggle from '@/components/LanguageToggle';
 
 const Auth: React.FC = () => {
   const { user, profile, signUp, signIn } = useAuth();
+  const { t } = useTranslation();
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -33,8 +36,8 @@ const Auth: React.FC = () => {
       if (isSignUp) {
         if (!formData.name || !formData.village || !formData.role) {
           toast({
-            title: "Error",
-            description: "Please fill in all fields",
+            title: t('auth.signupError'),
+            description: t('auth.fillAllFields'),
             variant: "destructive"
           });
           setLoading(false);
@@ -51,14 +54,14 @@ const Auth: React.FC = () => {
 
         if (error) {
           toast({
-            title: "Signup Error",
+            title: t('auth.signupError'),
             description: error.message,
             variant: "destructive"
           });
         } else {
           toast({
             title: "Success",
-            description: "Account created successfully! Please check your email to verify your account."
+            description: t('auth.signupSuccess')
           });
         }
       } else {
@@ -66,7 +69,7 @@ const Auth: React.FC = () => {
 
         if (error) {
           toast({
-            title: "Login Error",
+            title: t('auth.loginError'),
             description: error.message,
             variant: "destructive"
           });
@@ -100,18 +103,21 @@ const Auth: React.FC = () => {
           <div className="flex items-center justify-center mb-4">
             <Droplets className="h-12 w-12 text-primary mr-2" />
             <div>
-              <CardTitle className="text-2xl font-bold text-primary">Jal Rakshak</CardTitle>
-              <CardDescription className="text-secondary">Water & Health Guardian</CardDescription>
+              <CardTitle className="text-2xl font-bold text-primary">{t('appName')}</CardTitle>
+              <CardDescription className="text-secondary">{t('appSubtitle')}</CardDescription>
             </div>
           </div>
-          <CardDescription>
-            {isSignUp ? 'Create your account' : 'Sign in to your account'}
-          </CardDescription>
+          <div className="flex items-center justify-between mb-2">
+            <CardDescription>
+              {isSignUp ? t('auth.signupTitle') : t('auth.loginTitle')}
+            </CardDescription>
+            <LanguageToggle />
+          </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('auth.email')}</Label>
               <Input
                 id="email"
                 type="email"
@@ -122,7 +128,7 @@ const Auth: React.FC = () => {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('auth.password')}</Label>
               <Input
                 id="password"
                 type="password"
@@ -135,7 +141,7 @@ const Auth: React.FC = () => {
             {isSignUp && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">{t('auth.fullName')}</Label>
                   <Input
                     id="name"
                     type="text"
@@ -146,7 +152,7 @@ const Auth: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="village">Village</Label>
+                  <Label htmlFor="village">{t('auth.village')}</Label>
                   <Input
                     id="village"
                     type="text"
@@ -157,34 +163,34 @@ const Auth: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="role">Role</Label>
+                  <Label htmlFor="role">{t('auth.role')}</Label>
                   <Select onValueChange={(value) => setFormData({ ...formData, role: value as UserRole })}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select your role" />
+                      <SelectValue placeholder={t('auth.selectRole')} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="asha">
                         <div className="flex items-center">
                           {getRoleIcon('asha')}
-                          <span className="ml-2">ASHA Worker</span>
+                          <span className="ml-2">{t('roles.asha')}</span>
                         </div>
                       </SelectItem>
                       <SelectItem value="official">
                         <div className="flex items-center">
                           {getRoleIcon('official')}
-                          <span className="ml-2">Health Official</span>
+                          <span className="ml-2">{t('roles.official')}</span>
                         </div>
                       </SelectItem>
                       <SelectItem value="community">
                         <div className="flex items-center">
                           {getRoleIcon('community')}
-                          <span className="ml-2">Community Member</span>
+                          <span className="ml-2">{t('roles.community')}</span>
                         </div>
                       </SelectItem>
                       <SelectItem value="villager">
                         <div className="flex items-center">
                           {getRoleIcon('villager')}
-                          <span className="ml-2">Villager</span>
+                          <span className="ml-2">{t('roles.villager')}</span>
                         </div>
                       </SelectItem>
                     </SelectContent>
@@ -194,7 +200,7 @@ const Auth: React.FC = () => {
             )}
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Loading...' : (isSignUp ? 'Sign Up' : 'Sign In')}
+              {loading ? t('auth.loading') : (isSignUp ? t('auth.signup') : t('auth.login'))}
             </Button>
 
             <div className="text-center">
@@ -204,7 +210,7 @@ const Auth: React.FC = () => {
                 onClick={() => setIsSignUp(!isSignUp)}
                 className="text-sm"
               >
-                {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+                {isSignUp ? t('auth.alreadyHaveAccount') : t('auth.dontHaveAccount')}
               </Button>
             </div>
           </form>
