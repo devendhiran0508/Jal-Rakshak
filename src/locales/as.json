@@ -282,6 +282,17 @@
     "response": "চৰকাৰী প্ৰতিক্ৰিয়া"
   },
 
+  "map": {
+    "diseaseHotspots": "ৰোগৰ হটস্পট",
+    "last7Days": "যোৱা ৭ দিন",
+    "cases": "কেচ",
+    "commonSymptom": "সবাতোকৈ সাধাৰণ লক্ষণ",
+    "riskLevel": "বিপদৰ স্তৰ",
+    "lowRisk": "কম বিপদ",
+    "mediumRisk": "মজলীয়া বিপদ",
+    "highRisk": "বেছি বিপদ"
+  },
+
   "messages": {
     "error": "ত্ৰুটি",
     "success": "সফল"

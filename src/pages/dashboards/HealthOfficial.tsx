@@ -14,6 +14,7 @@ import { Shield, AlertTriangle, BarChart3, Users, LogOut, Plus, Brain } from 'lu
 import { UserRole } from '@/contexts/AuthContext';
 import LanguageToggle from '@/components/LanguageToggle';
 import FeedbackManagement from '@/components/FeedbackManagement';
+import DiseaseHotspotsMap from '@/components/DiseaseHotspotsMap';
 
 interface Report {
   id: string;
@@ -311,6 +312,11 @@ const HealthOfficial: React.FC = () => {
             </CardContent>
           </Card>
         )}
+
+        {/* Disease Hotspots Map */}
+        <div className="mb-6">
+          <DiseaseHotspotsMap />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Charts */}

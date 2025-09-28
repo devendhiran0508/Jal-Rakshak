@@ -282,6 +282,17 @@
     "response": "सरकारि जाब"
   },
 
+  "map": {
+    "diseaseHotspots": "गुवार हटस्पट",
+    "last7Days": "गाब्लै ७ सान",
+    "cases": "खालामसोर",
+    "commonSymptom": "गोबां साधारान खैया",
+    "riskLevel": "गोदान फेजेत",
+    "lowRisk": "हाया गोदान",
+    "mediumRisk": "मैजिंगै गोदान",
+    "highRisk": "गेदेर गोदान"
+  },
+
   "messages": {
     "error": "बुंगौ",
     "success": "बावनो"

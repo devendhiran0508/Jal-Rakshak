@@ -280,6 +280,17 @@
     "response": "आधिकारिक प्रतिवाद"
   },
 
+  "map": {
+    "diseaseHotspots": "रोग हॉटस्पॉट",
+    "last7Days": "पिछले 7 दिन",
+    "cases": "मामले",
+    "commonSymptom": "सबसे आम लक्षण",
+    "riskLevel": "जोखिम स्तर",
+    "lowRisk": "कम जोखिम",
+    "mediumRisk": "मध्यम जोखिम",
+    "highRisk": "उच्च जोखिम"
+  },
+
   "messages": {
     "error": "त्रुटि",
     "success": "सफलता"

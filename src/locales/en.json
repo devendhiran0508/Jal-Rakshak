@@ -280,6 +280,22 @@
     "response": "Official Response"
   },
 
+  "map": {
+    "diseaseHotspots": "Disease Hotspots",
+    "last7Days": "Last 7 Days",
+    "cases": "Cases",
+    "commonSymptom": "Most Common Symptom",
+    "riskLevel": "Risk Level",
+    "lowRisk": "Low Risk",
+    "mediumRisk": "Medium Risk",
+    "highRisk": "High Risk"
+  },
+
+  "common": {
+    "cancel": "Cancel",
+    "loading": "Loading..."
+  },
+
   "messages": {
     "error": "Error",
     "success": "Success"
