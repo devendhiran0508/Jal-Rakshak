@@ -150,7 +150,12 @@ const createOutbreakAlert = async (rule: OutbreakRule): Promise<void> => {
       .limit(1)
       .maybeSingle();
 
-    const creatorId = official?.user_id || '00000000-0000-0000-0000-000000000000';
+    if (!official?.user_id) {
+      console.error('No official user found to create outbreak alert');
+      return;
+    }
+
+    const creatorId = official.user_id;
 
     const { error } = await supabase
       .from('alerts')
