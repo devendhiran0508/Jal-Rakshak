@@ -14,22 +14,34 @@ const resources = {
   }
 };
 
-i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources,
-    fallbackLng: 'en',
-    lng: localStorage.getItem('language') || 'en',
-    
-    interpolation: {
-      escapeValue: false
-    },
+const initI18n = async () => {
+  let savedLanguage = 'en';
+  try {
+    savedLanguage = localStorage.getItem('language') || 'en';
+  } catch (error) {
+    console.warn('Could not access localStorage for language preference');
+  }
 
-    detection: {
-      order: ['localStorage', 'navigator'],
-      caches: ['localStorage']
-    }
-  });
+  await i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: 'en',
+      lng: savedLanguage,
+      
+      interpolation: {
+        escapeValue: false
+      },
+
+      detection: {
+        order: ['localStorage', 'navigator'],
+        caches: ['localStorage']
+      }
+    });
+};
+
+// Initialize i18n
+initI18n().catch(console.error);
 
 export default i18n;

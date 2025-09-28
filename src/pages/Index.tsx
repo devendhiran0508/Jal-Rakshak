@@ -12,7 +12,7 @@ const Index = () => {
   const { t } = useTranslation();
 
   // If user is logged in, redirect to their dashboard
-  if (user && profile) {
+  if (user && profile && profile.role) {
     return <Navigate to={`/dashboard/${profile.role}`} replace />;
   }
 
