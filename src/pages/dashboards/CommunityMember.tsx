@@ -107,23 +107,23 @@ const CommunityMember: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center">
-            <Users className="h-8 w-8 text-primary mr-3" />
-            <div>
-              <h1 className="text-2xl font-bold text-primary">{t('roles.community')} {t('dashboard.overview')}</h1>
-              <p className="text-muted-foreground">{t('dashboard.welcome')}, {profile?.name}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <OfflineIndicator />
-            <LanguageToggle />
-            <Button onClick={signOut} variant="outline">
-              <LogOut className="h-4 w-4 mr-2" />
-              {t('dashboard.logout')}
-            </Button>
-          </div>
-        </div>
+<div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-6">
+  <div className="flex items-center">
+    <Users className="h-8 w-8 text-primary mr-3" />
+    <div>
+      <h1 className="text-2xl font-bold text-primary">{t('roles.community')} {t('dashboard.overview')}</h1>
+      <p className="text-muted-foreground">{t('dashboard.welcome')}, {profile?.name}</p>
+    </div>
+  </div>
+  <div className="flex flex-col gap-2 w-full sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+    <OfflineIndicator />
+    <LanguageToggle />
+    <Button onClick={signOut} variant="outline" className="w-full sm:w-auto">
+      <LogOut className="h-4 w-4 mr-2" />
+      {t('dashboard.logout')}
+    </Button>
+  </div>
+</div>
 
         <div className="grid grid-cols-1 gap-6">
           {/* Alerts */}
